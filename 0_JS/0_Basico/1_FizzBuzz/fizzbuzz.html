@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Ejemplo de FizzBuzz</title>
+    </head>
+    <body>
+        <script>
+            // Escribir un programa que imprime en pantalla números del 1 al 100. 
+            // Para números múltiplos de 3 mostrar la palabra "Fizz", para números múltiplos de 5
+            // mostrar la palabra "Buzz". Para números que son múltiplos de 3 y de 5 mostrar la palabra "FizzBuzz"
+        
+            var texto = '';
+
+            for(var i=1; i<101; i++)
+            {
+                texto = i.toString();
+
+                if(i % 3 === 0)
+                {
+                    texto += ": Fizz";
+
+                    if(i % 5 === 0)
+                    {
+                        texto += "Buzz";
+                    }
+                }
+                else
+                {
+                    if(i % 5 === 0)
+                    {
+                        texto += ": Buzz";
+                    }
+                }
+                
+                console.log(texto);
+            }
+            
+        </script>
+    </body>
+</html>
