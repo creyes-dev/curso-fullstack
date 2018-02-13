@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Ejemplo de recursividad con factoriales</title>
+    </head>
+    <body>
+        <script>
+            
+            function factorial(num) {
+                var total = 1;
+                for(var i = 1; i<= num; i++)
+                {
+                    total = total * i;
+                }
+                return total;               
+            }
+
+            function factorial_recursividad(num) {
+                var valor = 1;
+                if(num!=0)
+                {  
+                    valor = num * factorial_recursividad(num - 1);
+                }
+
+                // La ultima llamada va a llegar hasta aca (por recibir num=0), 
+                // a partir de este punto las funciones llamadoras devolverán 
+                // lo que devuelve la función a la que llamaron
+                return valor; 
+            }
+            
+            var nroEjemplo = 7;
+            var factorialEjemplo = factorial(nroEjemplo);
+            console.log("El factorial de " + nroEjemplo.toString() + " es " + factorialEjemplo.toString());
+
+            factorialEjemplo = factorial_recursividad(nroEjemplo);
+            console.log("El factorial de " + nroEjemplo.toString() + " calculado con recursividad es " + factorialEjemplo.toString());
+                
+        </script>
+    </body>
+</html>
