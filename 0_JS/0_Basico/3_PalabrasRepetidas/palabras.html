@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Palabras encontradas</title>
+    </head>
+    <body>
+        <script>
+
+            // Mostrar el contenido de un array que contiene la cantidad
+            // de repeticiones de cada palabra en un texto, el array
+            // debe estar ordenado por cantidad de repeticiones y 
+            // letras de la palabra
+
+            // No está permitido utilizar arrays asociativos
+            // porque el nombre de un key puede entrar en 
+            // conflicto con una propiedad de la instancia de Object
+            // (ej. propiedad lenght)
+            
+            function palabraContada(palabras, palabra){
+                var palabraContada = false;
+                
+                for(var i = 0; i < palabras.length; i++) { 
+                    if(palabras[i][0] == palabra){
+                        palabraContada = true;
+                    }
+                }
+                return palabraContada;
+            }
+
+            function cantidadRepeticiones(palabras, palabra) {
+                var cantRepeticiones = 0;
+                for(var i = 0; i < palabras.length; i++) { 
+                    if(palabras[i] == palabra){
+                        cantRepeticiones += 1;
+                    }
+                }
+                return cantRepeticiones;
+            }
+
+            function conteoPalabras(palabras) {
+                var palabrasEncontradas = new Array();
+
+                palabras = palabras.toLowerCase();
+                palabras = palabras.split(' ');
+
+                for(var i = 0; i < palabras.length; i++){
+                    if(!palabraContada(palabrasEncontradas, palabras[i])){
+                        var indice = palabrasEncontradas.length;
+                        var palabraEncontrada = new Array();
+                        palabraEncontrada[0] = palabras[i];
+                        palabraEncontrada[1] = cantidadRepeticiones(palabras, palabras[i]);
+
+                        palabrasEncontradas.push(palabraEncontrada);
+                    }
+                }
+                return palabrasEncontradas;
+            }
+
+            var texto = 'Lorem ipsum dolor sit amet per an cibo dolorem modo noluisse ad nam An mel facer essent essent epicurei Meis fuisset quaerendum et pri Duo error veniam quodsi ex, eu nam paulo saepe mentitum Ex eam timeam dolorem eum alii nostrud tibique at Viris praesent vel in ei est falli omnes Lorem ipsum dolor sit Viris sit Viris omnes Lorem';
+            var palabrasContadas = conteoPalabras(texto);
+
+            // opcionalmente el método short recibe una función que define
+            // el orden del ordenamiento
+            palabrasContadas.sort(function(palabra1, palabra2) {
+                if(palabra1[1] == palabra2[1]){
+                    return (palabra1[0] > palabra2[0])? 1 : -1; } // Si la cantidad es la misma ordenar por nombre (asc)
+                else {
+                    return (palabra1[1] > palabra2[1])? -1 : 1;   // Ordenar por cantidad (desc)
+                }
+            });
+
+            console.log(palabrasContadas);
+
+        </script>
+    </body>
+</html>
