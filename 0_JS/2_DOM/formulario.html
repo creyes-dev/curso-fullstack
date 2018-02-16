@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Formulario con validaciones</title>
+        <script type="text/javascript">
+
+            function validarClaves(){
+                
+                // Validar email
+                var email = document.getElementById('txtEmail');
+
+                if(email.value == ""){
+                    alert('Debe ingresar su email');
+                    email.focus();
+                    return false;
+                }
+
+                var reMail = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/;
+                if (!reMail.test(email.value)) {
+                    alert('Debe ingresar un email válido');
+                    document.getElementById('txtEmail').focus();
+                    return false;
+                }
+
+                // Validar password
+                var pass1 = document.getElementById('txtPassword');
+                var pass2 = document.getElementById('txtRepetirPassword');
+
+                if(pass1.value == "" || pass2.value == ""){
+                    alert('Debe ingresar la contraseña y repetirla');
+                    document.getElementById('txtPassword').focus();
+                    return false;
+                }
+
+                if(pass1.value != pass2.value){
+                    alert('Las contraseñas no coinciden');
+                    document.getElementById('txtPassword').focus();
+                    return false;
+                }
+
+                if(pass1.value.length < 6) {
+                    alert('La contraseña debe tener al menos 6 caracteres');
+                    document.getElementById('txtPassword').focus();
+                    return false;
+                }
+
+                // Validar la edad
+                if(document.getElementById('chkMayor').checked && document.getElementById('chkMenor').checked) {
+                    alert('Debe seleccionar solo una opción');
+                    return false
+                }
+                else
+                {
+                    if(!document.getElementById('chkMayor').checked && !document.getElementById('chkMenor').checked) {
+                        alert('Debe seleccionar al menos una opción');
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            
+        </script>
+    </head>
+    <body>
+        <h1>Registro de usuario</h1>
+
+        <form action="RegistrarUsuario" method="get" onsubmit="return validarClaves()">
+            <label for="email">Tu email:</label>
+            <input id="txtEmail" type="text" name="email">
+
+            <label for="password">Tu password:</label>
+            <input id="txtPassword" type="text" name="password">
+            
+            <label for="repetirPassword">Repetí tu password:</label>
+            <input id="txtRepetirPassword" type="text" name="repetirPassword">
+            
+            <label for="mayorEdad">Edad:</label>
+            <input id="chkMayor" name="mayorEdad" type="checkbox">
+            <input id="chkMenor" name="mayorEdad" type="checkbox">
+            
+            <input id="btnSubmit" type="submit" value="Registrar" />
+        </form>
+    </body>
+</html>
