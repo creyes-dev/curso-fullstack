@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+
+<title>Ejemplo 3: Manipulación del DOM</title>
+
+	<script type="text/javascript">
+
+		var contador=0;
+		var totalinvitados=0;
+		function agregar() {
+			var inv=document.getElementById('ingreso'); //referencia al input
+
+			if (inv.value=="") return;
+
+			var nuevo = document.createElement("div"); //fila para agregar
+			nuevo.setAttribute("id", "invdiv"+contador); //id para borrar --- LUEGO
+			nuevo.style.fontFamily='sans-serif';
+			nuevo.style.fontSize=22;
+			nuevo.style.backgroundColor='yellow';
+//			nuevo.style.border='dotted';
+//			nuevo.style.display='none';			
+//			nuevo.style.display='inline';						
+
+			var txtnuevo= document.createTextNode( inv.value + ' '); //texto para la fila
+			nuevo.appendChild(txtnuevo); //meto texto
+
+			// ---------------- PARA ELIMINAR
+			var borrarnuevo = document.createElement("a"); //link para borrar
+			borrarnuevo.setAttribute("href", "#"); //id para borrar LUEGO
+			borrarnuevo.setAttribute("onClick", "borrar("+ contador +")"); //id para borrar LUEGO
+			borrarnuevo.style.fontFamily='sans-serif';
+			borrarnuevo.style.fontSize=15;	
+			borrarnuevo.style.fontStyle='italic';						
+
+			var txtborrarnuevo= document.createTextNode( "borrar" ); //texto para el link borrar
+			borrarnuevo.appendChild(txtborrarnuevo); 
+
+			nuevo.appendChild(borrarnuevo); //meto link para borrar
+			// ----------------
+
+			var caja=document.getElementById('lista'); //referencia a la div
+			caja.appendChild(nuevo); //meto fila
+			
+			var nuevoinput=document.createElement("input"); //para el form oculto
+			nuevoinput.setAttribute("type","hidden"); //ponerle HIDDEN, TEXT es para verlos
+			nuevoinput.setAttribute("name","inv[]");
+			nuevoinput.setAttribute("value",inv.value);
+			nuevoinput.setAttribute("id","invinput"+contador);
+
+			var formoculto=document.getElementById('formoculto'); //referencia al form
+			formoculto.appendChild(nuevoinput); //meto fila
+
+			//listo! agregado
+			contador++;
+			totalinvitados++;			
+
+			inv.value=""; //reseteo input
+			inv.focus();
+		}
+
+		function borrar(id) {
+			
+			//borro de la lista, la fila
+			var divborrar = document.getElementById('invdiv'+id);
+			var padre = divborrar.parentNode;
+			padre.removeChild(divborrar);
+			
+			//borro del form, el input
+			var inputborrar = document.getElementById('invinput'+id);
+			var padre = inputborrar.parentNode;
+			padre.removeChild(inputborrar);
+			
+			totalinvitados--;
+		}
+		
+		function validar(){
+			if (totalinvitados == 0){
+				alert("Debe haber alguna persona invitada");
+				return false;
+			}
+			return true;
+		}
+
+	</script>
+
+</head>
+<body>
+
+	<h1>Lista de invitados</h1>
+
+	Ingrese nombre del invitado: <br />
+	<input type="text" id="ingreso" /> <input type="button" value="Agregar a la lista" onClick="agregar()" />
+
+		<hr /> 
+
+	<div id="lista">
+	<h3> Lista de invitados </h3>
+	</div>
+
+		<hr />
+
+	<form action="noimporta" method="get" id="formoculto" onSubmit="return validar()">
+
+	<input type="submit" value="Enviar lista" />
+	</form>
+
+</body>
+</html>
