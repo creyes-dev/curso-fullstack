@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Palabras encontradas</title>
+    </head>
+    <body>
+        <script>
+
+            var numeros = [1,2,3,4,5];
+
+            // Procedimiento Callback que será llamado por cada iteración 
+            // en un array por una función each
+            function multiplicarPorDosYMostrar(value, index, array){
+                var resultado = value * 2;
+                console.log(resultado);
+            }
+
+            // Procedimiento Callback que será llamado por cada iteración 
+            // en un array por una función map
+            function multiplicarPorDosYDevolever(value, index, array){
+                var resultado = value * 2;
+                return resultado;
+            }
+
+            console.log("Numeros recorridos por un for:");
+
+            for(var i=0; i < numeros.length; i++){
+                var resultado = numeros[i] * 2;
+                console.log(resultado);
+            }
+
+            console.log("Numeros recorridos por un foreach:");
+
+            // forEach llama al callback que se suscribe a cada iteración recorrida por el mismo
+            // (una por cada elemento del array)
+            numeros.forEach(multiplicarPorDosYMostrar);
+
+            console.log("Numeros obtenidos por un map:");
+
+            // map llama al callback que se suscribe a cada iteración recorrida por el mismo
+            // (una por cada elemento del array), map recibirá un valor del procedimiento callback 
+            // suscrito y como resultado almacenará dicho valor en el objeto array que llamó a la función
+            numeros = numeros.map(multiplicarPorDosYDevolever);
+
+            for(var i=0; i < numeros.length; i++) {
+                console.log(numeros[i]);
+            }
+
+
+        </script>
+    </body>
+</html>
