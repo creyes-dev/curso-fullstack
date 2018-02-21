@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Evaluación Módulo 1 – Unidad 1</title>
+
+        <script type="text/javascript">
+            
+            function nombreEsValido(){
+                var esValido = false;
+                var nombre = document.getElementById('txtNombre');
+
+                if(nombre.value == "")
+                {
+                    alert('Por favor ingrese su nombre');
+                }
+                else
+                {
+                    var reNombre = /^([A-Za-zñáéíóú]+[\s]*)+$/;
+
+                    if (!reNombre.test(nombre.value)) 
+                    {
+                        alert('Debe ingresar un nombre válido');
+                        nombre.focus(); 
+                    }
+                    else
+                    {
+                        esValido = true;
+                    }
+                }
+                return esValido;
+            }
+
+            function apellidoEsValido(){
+                var esValido = false;
+                var apellido = document.getElementById('txtApellido');
+
+                if(apellido.value == "")
+                {
+                    alert('Por favor ingrese su apellido');
+                }
+                else
+                {
+                    var reApellido = /^([A-Za-zñáéíóú]+[\s]*)+$/;
+
+                    if (!reApellido.test(apellido.value)) 
+                    {
+                        alert('Debe ingresar un apellido válido');
+                        apellido.focus(); 
+                    }
+                    else
+                    {
+                        esValido = true;
+                    }
+                }
+                return esValido;
+            }
+
+            function fechaNacimientoEsValida(){
+                var esValido = false;
+
+                
+
+                return esValido;
+            }
+
+            function validarDatosFormulario(){
+                var nombreValido = nombreEsValido();
+                var apellidoValido = apellidoEsValido();
+
+                var datosValidos = nombreValido && apellidoValido;
+                return datosValidos;
+            }
+
+        </script>
+    </head>   
+    <body>
+        <form action="RegistrarDatos" method="get" onsubmit="return validarDatosFormulario()">
+            <h1>Formulario</h1>
+            <section>
+                <h2>Datos personales</h2>
+                <p>
+                    <label for="nombre"><span>Nombre: </span></label>
+                    <input type="text" id="txtNombre" name="nombre">
+                </p>
+                <p>
+                    <label for="apellido"><span>Apellido: </span></label>
+                    <input type="text" id="txtApellido" name="apellido">
+                </p>
+                <p>
+                    <label for="fechaNacimiento"><span>Fecha de Nacimiento: </span></label>
+                    <input type="text" id="txtFechaNacimiento" name="fechaNacimiento">
+                </p>
+                <p>
+                    <label for="email"><span>E-Mail: </span></label>
+                    <input type="text" id="txtEmail" name="email">
+                </p>
+                <p>
+                    <label for="telefono"><span>Teléfono: </span></label>
+                    <input type="text" id="txtTelefono" name="telefono">
+                </p>
+            </section>
+            <section>
+                <h2>Datos de usuario</h2>
+                <p>
+                    <label for="usuario"><span>Usuario: </span></label>
+                    <input type="text" id="txtUsuario" name="usuario">
+                </p>
+                <p>
+                    <label for="password"><span>Contraseña: </span></label>
+                    <input type="text" id="txtPassword" name="password">
+                </p>
+            </section>
+            <section>
+                <p> <button type="submit">Ingresar datos</button> </p>
+            </section>
+        </form>
+    </body>   
+</html>
