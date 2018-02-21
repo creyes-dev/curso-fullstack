@@ -7,58 +7,105 @@
         <script type="text/javascript">
             
             function nombreEsValido(){
-                var esValido = false;
                 var nombre = document.getElementById('txtNombre');
 
                 if(nombre.value == "")
                 {
                     alert('Por favor ingrese su nombre');
+                    return false;
                 }
                 else
                 {
                     var reNombre = /^([A-Za-zñáéíóú]+[\s]*)+$/;
-
                     if (!reNombre.test(nombre.value)) 
                     {
                         alert('Debe ingresar un nombre válido');
                         nombre.focus(); 
+                        return false;
                     }
                     else
                     {
-                        esValido = true;
+                        return true;
                     }
                 }
                 return esValido;
             }
 
             function apellidoEsValido(){
-                var esValido = false;
                 var apellido = document.getElementById('txtApellido');
 
                 if(apellido.value == "")
                 {
                     alert('Por favor ingrese su apellido');
+                    apellido.focus();
+                    return false;
                 }
                 else
                 {
                     var reApellido = /^([A-Za-zñáéíóú]+[\s]*)+$/;
-
                     if (!reApellido.test(apellido.value)) 
                     {
                         alert('Debe ingresar un apellido válido');
-                        apellido.focus(); 
+                        apellido.focus();
+                        return false;
                     }
                     else
                     {
+                        return true;
+                    }
+                }
+            }
+
+            function fechaNacimientoEsValida(){
+                var fechaNacimiento = document.getElementById('txtFechaNacimiento');
+
+                if(fechaNacimiento.value == "")
+                {
+                    alert('Por favor ingrese su fecha de nacimiento');
+                    reFechaNacimiento.focus();
+                    return false;
+                }
+                else
+                {
+                    var reFechaNacimiento = /^([0-9]{1,2})[\/]([0-9]{1,2})[\/]([0-9]{4})$/;
+                    if (!reFechaNacimiento.test(fechaNacimiento.value)) 
+                    {
+                        alert('Debe ingresar una fecha de nacimiento válida, se requiere un formato dd/mm/aaaa en el que el día y el mes pueden tener 1 dígito pero el año debe contar con 4 dígitos');
+                        reFechaNacimiento.focus();
+                        return false; 
+                    }
+                    else
+                    {
+                        var fragmentosFecha = fechaNacimiento.value.split("/"); 
+                        var anioIngresado = fragmentosFecha[2];
+                        var mesIngresado = fragmentosFecha[1] - 1;
+                        var diaIngresado = fragmentosFecha[0];
+
+                        var fecha = new Date(anioIngresado, mesIngresado, diaIngresado);
+
+                        
+
+                        
+
+
                         esValido = true;
                     }
                 }
                 return esValido;
             }
 
-            function fechaNacimientoEsValida(){
+            function emailEsValido() {
                 var esValido = false;
+                var email = document.getElementById('txtEmail');
 
+
+                return esValido;
+            }
+
+            function numeroTelefonoEsValido()
+            {
+                var esValido = false;
+                var numeroTelefono = document.getElementById('txtTelefono');
                 
 
                 return esValido;
@@ -67,8 +114,10 @@
             function validarDatosFormulario(){
                 var nombreValido = nombreEsValido();
                 var apellidoValido = apellidoEsValido();
+                var fechaNacimientoValida = fechaNacimientoEsValida();
+                var telefonoValido = numeroTelefonoEsValido();
 
-                var datosValidos = nombreValido && apellidoValido;
+                var datosValidos = nombreValido && apellidoValido && fechaNacimientoValida && telefonoValido;
                 return datosValidos;
             }
 
