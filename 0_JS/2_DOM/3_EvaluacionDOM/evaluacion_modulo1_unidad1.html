@@ -4,11 +4,122 @@
         <meta charset="UTF-8">
         <title>Evaluación Módulo 1 – Unidad 1</title>
 
+        <style>
+                    
+            h1 {
+                margin-top: 0;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            form {
+                font: 1em sans-serif;
+                margin: 0 auto;
+                width: 400px;
+                padding: 1em;
+                border: 1px solid #CCC;
+                border-radius: 1em;
+            }
+
+            div+div {
+                margin-top: 1em;
+            }
+
+            label span {
+                display: inline-block;
+                width: 120px;
+                text-align: right;
+            }
+
+            input, textarea {
+                width: 250px;
+                box-sizing: border-box;
+                border: 1px solid #999;
+            }
+
+            input:focus, textarea:focus {
+                border-color: #000;
+            }
+
+            textarea {
+                vertical-align: top;
+                height: 5em;
+                resize: vertical;
+            }
+
+            fieldset {
+                width: 250px;
+                box-sizing: border-box;
+                margin-left: 136px;
+                border: 1px solid #999;
+            }
+
+            button {
+                margin: 20px 0 0 124px;
+            }
+
+            label {
+            position: relative;
+            }
+
+            label em {
+            position: absolute;
+            right: 5px;
+            top: 20px;
+            }
+                    
+        </style>
+
         <script type="text/javascript">
             
+			function obtenerEdadActual(fechaNacimiento){
+				var fechaActual = new Date();
+				var edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+				
+				if(fechaActual.getMonth() <= fechaNacimiento.getMonth()) 
+				{
+					if(fechaActual.getMonth() == fechaNacimiento.getMonth()) 
+					{
+						if(fechaActual.getDate() < fechaNacimiento.getDate()) 
+						{
+							// Aunque este mes cumpla años aún no ha llegado el día
+							edad = edad - 1;
+						}
+					}
+					else	
+					{
+						// Falta para el mes de cumpleaños de este año
+						edad = edad - 1;
+					}
+				}
+				return edad;
+			}
+
+            function poseeLetrasyNumeros(texto){
+                if(texto.search(/\d/) >= 0){
+                    if(texto.search(/[a-zA-Z]/) >= 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
             function nombreEsValido(){
                 var nombre = document.getElementById('txtNombre');
-
+				
+				// Validar carga del nombre
                 if(nombre.value == "")
                 {
                     alert('Por favor ingrese su nombre');
@@ -16,6 +127,7 @@
                 }
                 else
                 {
+					// Validar formato del nombre
                     var reNombre = /^([A-Za-zñáéíóú]+[\s]*)+$/;
                     if (!reNombre.test(nombre.value)) 
                     {
@@ -28,12 +140,12 @@
                         return true;
                     }
                 }
-                return esValido;
             }
 
             function apellidoEsValido(){
                 var apellido = document.getElementById('txtApellido');
 
+				// Validar carga del apellido
                 if(apellido.value == "")
                 {
                     alert('Por favor ingrese su apellido');
@@ -42,6 +154,7 @@
                 }
                 else
                 {
+					// Validar formato del apellido
                     var reApellido = /^([A-Za-zñáéíóú]+[\s]*)+$/;
                     if (!reApellido.test(apellido.value)) 
                     {
@@ -59,65 +172,190 @@
             function fechaNacimientoEsValida(){
                 var fechaNacimiento = document.getElementById('txtFechaNacimiento');
 
+				// Validar carga de la fecha de nacimiento
                 if(fechaNacimiento.value == "")
                 {
                     alert('Por favor ingrese su fecha de nacimiento');
-                    reFechaNacimiento.focus();
+                    fechaNacimiento.focus();
                     return false;
                 }
                 else
                 {
+					// Validar el formato de la fecha de nacimiento
                     var reFechaNacimiento = /^([0-9]{1,2})[\/]([0-9]{1,2})[\/]([0-9]{4})$/;
                     if (!reFechaNacimiento.test(fechaNacimiento.value)) 
                     {
                         alert('Debe ingresar una fecha de nacimiento válida, se requiere un formato dd/mm/aaaa en el que el día y el mes pueden tener 1 dígito pero el año debe contar con 4 dígitos');
-                        reFechaNacimiento.focus();
+                        fechaNacimiento.focus();
                         return false; 
                     }
                     else
                     {
+						// Validar que el día y el mes ingresado sean correctos
                         var fragmentosFecha = fechaNacimiento.value.split("/"); 
                         var anioIngresado = fragmentosFecha[2];
                         var mesIngresado = fragmentosFecha[1] - 1;
                         var diaIngresado = fragmentosFecha[0];
 
                         var fecha = new Date(anioIngresado, mesIngresado, diaIngresado);
+						
+						if(fecha.getFullYear() != anioIngresado || fecha.getMonth() != mesIngresado || fecha.getDate() != diaIngresado){
+							alert('Por favor ingrese una fecha de nacimiento válida');
+							fechaNacimiento.focus();
+							return false;
+						}
+						else 
+						{
+							// Validar que la fecha ingresada no sea posterior a la fecha actual
+							var fechaActual = new Date();
+							if(fecha >= fechaActual) {
+								alert('La fecha de nacimiento debe ser anterior a la fecha actual, por favor ingrese una fecha de nacimiento anterior a la fecha actual');
+								fechaNacimiento.focus();
+								return false;
+							}
+							else
+							{
+								// Validar que la fecha ingresada corresponda a la de una persona de 6 a 120 años de edad
+                                var edad = obtenerEdadActual(fecha);
 
-                        
-
-                        
-
-
-                        esValido = true;
+                                if(edad < 6 || edad > 120){
+                                    alert('Por favor ingrese una fecha de nacimiento válida. La fecha de nacimiento debe corresponder a la de una persona de entre 6 a 120 años de edad ');
+                                    fechaNacimiento.focus();
+                                    return false;
+                                }
+                                else
+                                {
+                                    return true;
+                                }
+							}
+						}
                     }
                 }
-                return esValido;
             }
 
             function emailEsValido() {
-                var esValido = false;
                 var email = document.getElementById('txtEmail');
-
-
-                return esValido;
+				
+				// Validar carga del E-Mail
+                if(email.value == "")
+                {
+                    alert('Por favor ingrese su dirección de E-Mail');
+                    email.focus();
+                    return false;
+                }
+				else
+				{
+					// Validar el formato del E-Mail
+                    var reMail = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/;
+                    if (!reMail.test(email.value)) 
+                    {
+                        alert('Debe ingresar una dirección de E-Mail válida');
+                        email.focus();
+                        return false; 
+                    }
+					else
+					{
+						return true;
+					}
+				}
             }
 
             function numeroTelefonoEsValido()
             {
-                var esValido = false;
-                var numeroTelefono = document.getElementById('txtTelefono');
-                
+                var nroTelefono = document.getElementById('txtTelefono');
+				
+				if(nroTelefono.value == "")
+				{
+					return true;
+				}
+				else
+				{
+					// Validar el formato del número de teléfono
+					var reTelefonoLinea = /^\d{4}[\s\.-]?\d{4}$/;
+					var reTelefonoCelular = /^\(?\d{2}\)?[\s\.-]?\d{4}[\s\.-]?\d{4}$/;
+					
+					if(!reTelefonoLinea.test(nroTelefono.value) && !reTelefonoCelular.test(nroTelefono.value)){
+						alert('Por favor ingrese un número de teléfono válido. Por ejemplo 4904-2930 si ingresa un número de teléfono de linea, 15-6569-3010 si ingresa un teléfono celular, siendo los guiones opcionales en ambos casos');
+						nroTelefono.focus();
+						return false;
+					}
+					else
+					{
+						return true;
+					}
+				}
+            }
+			
+			function usuarioEsValido()
+			{
+				var usuario = document.getElementById('txtUsuario');
+				
+				// Validar la carga del nombre de usuario
+				if(usuario.value == "")
+				{
+					alert('Debe ingresar su nombre de usuario');
+					usuario.focus();
+					return false;
+				}
+				else
+				{
+					// Validar el formato del usuario
+					var reUsuario = /^[a-zA-Z0-9]{8,}$/;
+					if(!reUsuario.test(usuario.value)) {
+						alert('Por favor ingrese un nombre de usuario válido. El nombre de usuario debe contener al menos 8 caracteres y debe estar conformado por letras y números');
+						usuario.focus();
+						return false;
+					}
+					else
+					{
+                        if(!poseeLetrasyNumeros(usuario.value)){
+                            alert('Por favor ingrese un nombre de usuario válido. El nombre de usuario debe estar conformado por letras y números')
+                            usuario.focus();
+                            return false;
+                        }
+                        else
+                        {
+                            return true;   
+                        }
+					}					
+				}
+			}
 
-                return esValido;
+            function passwordEsValido(){
+                var password = document.getElementById('txtPassword');
+
+                // Validar carga del password
+                if(password.value == ""){
+                    alert('Debe ingresar su password');
+					password.focus();
+					return false;
+                }
+                else
+                {
+                    // Validar el formato del password
+					var rePassword = /^[a-zA-Z0-9]{8,}$/;
+					if(!rePassword.test(password.value)) {
+						alert('Por favor ingrese un password válido. El password debe contener al menos 8 caracteres alfanuméricos');
+						password.focus();
+						return false;
+					}
+                    else
+                    {
+                        return true;
+                    }
+                }
             }
 
             function validarDatosFormulario(){
                 var nombreValido = nombreEsValido();
                 var apellidoValido = apellidoEsValido();
                 var fechaNacimientoValida = fechaNacimientoEsValida();
+				var emailValido = emailEsValido();
                 var telefonoValido = numeroTelefonoEsValido();
+                var usuarioValido = usuarioEsValido();
+                var passwordValido = passwordEsValido();
 
-                var datosValidos = nombreValido && apellidoValido && fechaNacimientoValida && telefonoValido;
+                var datosValidos = (nombreValido && apellidoValido && fechaNacimientoValida && emailValido && telefonoValido && usuarioValido && passwordValido);
                 return datosValidos;
             }
 
@@ -157,7 +395,7 @@
                 </p>
                 <p>
                     <label for="password"><span>Contraseña: </span></label>
-                    <input type="text" id="txtPassword" name="password">
+                    <input type="password" id="txtPassword" name="password">
                 </p>
             </section>
             <section>
