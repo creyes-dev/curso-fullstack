@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mostrar Ocultar</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+   $("#mayoria_edad").click(function(){
+      if ($("#mayoria_edad").prop("checked")){
+         $("#formulariomayores").css("display", "block");
+      }else{
+         $("#formulariomayores").css("display", "none");
+      }
+         
+   });
+});
+</script>
+
+</head>
+
+<body>
+<form>
+Nombre: <input type="text" name="nombre">
+<br>
+<input type="checkbox" name="mayor_edad" value="0" id="mayoria_edad"> Soy mayor de edad
+<br>
+<div id="formulariomayores" style="display: none;">
+Dato para mayores de edad: <input type="text" name="mayores_edad">
+</div>
+</form>
+
+</body>
+</html>

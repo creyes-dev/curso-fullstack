@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>método removeAttr</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+$("#boton").click(function(i){
+$("td").removeAttr("noWrap");
+});
+});
+</script>
+</head>
+<body>
+<table width="50">
+<tr>
+<td nowrap>
+Esta celda tiene un nowrap, con lo que todo el texto se muestra en la misma línea!
+Pero realmente la tabla mide 50 pixeles de anchura, luego tendrían que aparece varias líneas!
+</td>
+</tr>
+</table>
+<input type="Button" id="boton" value="Quitar nowrap">
+</body>
+</html>

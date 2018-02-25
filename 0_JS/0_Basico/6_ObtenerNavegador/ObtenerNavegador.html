@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Obtener Navegador</title>
+    </head>
+    <body>
+        <script>
+            function obtenerNombreNavegador() {
+                var esNavegador = navigator.userAgent;
+                
+                if(esNavegador.indexOf("MSIE") >= 0){
+                    return "MSIE";
+                } else if(esNavegador.indexOf("Firefox") >= 0) {
+                    return "Firefox";
+                } else if (esNavegador.indexOf("Chrome") >= 0) { 
+                    return "Chrome";
+                } else if (esNavegador.indexOf("Safari") >= 0) {
+                    return "Safari";
+                } else if (esNavegador.indexOf("Opera") >= 0) {
+                    return "Opera";
+                } else {
+                    return "DESCONOCIDO";
+                }
+            }
+
+            function obtenerVersionNavegador() {
+                var agenteUsuario = navigator.userAgent;
+                var navegador = obtenerNombreNavegador();
+                var indice = agenteUsuario.indexOf(navegador) + navegador.length + 1;
+                var versionNavegador = parseFloat(agenteUsuario.substring(indice, indice + 3));
+                
+                return versionNavegador;
+            }
+
+            document.write("Navegador: " + obtenerNombreNavegador() + ", Version: " + obtenerVersionNavegador());
+        
+        </script>
+    </body>
+</html>

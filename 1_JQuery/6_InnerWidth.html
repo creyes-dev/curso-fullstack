@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Funciones CSS en jQuery</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="application/x-javascript">
+function dimensionCapa(capa){
+capa = $(capa);
+var dimensiones = "";
+dimensiones += "Dimensiones internas: " + capa.innerWidth() + "x" + capa.innerHeight();
+dimensiones += "\nDimensiones externas: " + capa.outerWidth() + "x" + capa.outerHeight();
+alert(dimensiones);
+}
+function posicionCapa(capa){
+capa = $(capa);
+var posicion = "";
+posicion += "Posición relativo al documento:\nLEFT: " + capa.offset().left + "\nTOP:" + capa.offset().top;
+posicion += "\n\nPosición si no tuviera margen:\nLEFT: " + capa.position().left + "\nTOP:" + capa.position().top;
+alert(posicion);
+}
+$(document).ready(function(){
+$("#botondimensiones").click(function(){
+dimensionCapa("#capa1");
+});
+$("#botonposicion").click(function(){
+posicionCapa("#capa1");
+});
+$("#botontamano").click(function(){
+$("#capa1").css("width", 200);
+});
+$("#botonmargen").click(function(){
+$("#capa1").css("margin", 20);
+});
+$("#botondimensionesc2").click(function(){
+dimensionCapa("#capa2");
+});
+$("#botonposicionc2").click(function(){
+posicionCapa("#capa2");
+});
+
+});
+
+</script>
+
+</head>
+<body>
+<h1>Funciones CSS en jQuery de dimensiones y posición</h1>
+<p>Probando funciones de localización de elementos en la página...</p>
+<div id="capa1" style="padding: 24px; background-color: #ffccdd; float: left; border: 2px dotted #666;">
+<h2>capa1:</h2>
+Voy a crear esta capa para ver lo que mide y donde está posicionada.
+</div>
+<br style="clear: both;">
+<div style="margin: 10px;">
+<button id="botondimensiones" type="button">Dimensiones de capa1</button>
+<button id="botonposicion" type="button">Posicion de capa1</button>
+<button id="botontamano" type="button">Cambiar tamaño capa1</button>
+<button id="botonmargen" type="button">Cambiar margen capa1</button>
+</div>
+
+<div style="margin: 10px;">
+<button id="botondimensionesc2" type="button">Dimensiones de capa2</button>
+<button id="botonposicionc2" type="button">Posicion de capa2</button>
+</div>
+
+<br>
+Desplaza la página hacia abajo para ver la capa2...
+<br>
+<br>
+...
+<br>
+<div id="capa2" style="background-color:#ccc; border-bottom: 5px solid #999; margin-left: 10px;">
+Esta capa está muy hacia abajo!!
+</div>
+</body>
+</html> 

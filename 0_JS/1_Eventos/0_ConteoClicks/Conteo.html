@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Conteo de clics</title>
+    </head>
+    <body>
+
+        <form action="" name="formulario1">
+            <input type="button" id="btnBoton" name="boton" value="Boton cliqueado 0 veces" />
+        </form>
+
+        <script>
+            
+            var botonContador = document.getElementById("btnBoton");
+            var numeroDeClics = 0;
+
+            function botonClick(){
+                numeroDeClics++;
+                botonContador.value = "Boton cliqueado " + numeroDeClics + " veces";
+            }
+
+            botonContador.addEventListener("click", botonClick);
+
+        </script>
+    </body>
+</html>

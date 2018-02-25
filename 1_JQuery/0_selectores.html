@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+   <title>función jquery</title>
+   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+   var elem1 = $("#elem1");
+   //podríamos haber escrito: var elem1 = jQuery("#elem1");
+   elem1.css("background-color", "#ff9999");
+   
+   var divs = $("div");
+   //podríamos haber escrito: var elem1 = jQuery("#elem1");
+   divs.css("font-size", "32pt");
+});
+
+</script>
+</head>
+<body>
+<div id="elem1">Este elemento se llama elem1</div>
+<div id="elem2">Este otro elemento se llama elem2</div>
+</body>
+</html>
+
