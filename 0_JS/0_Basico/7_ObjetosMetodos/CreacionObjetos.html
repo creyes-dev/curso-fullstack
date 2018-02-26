@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Creacion de personas</title>
+    </head>
+    <body>
+        <script>
+            
+            function crearPersona(nom, ap, comida) {
+                var per = {
+                    nombre: nom,
+                    apellido: ap,
+                    comidaFavorita: comida,
+                    saludar: function() {
+                        return "Hola! mi nombre completo es " + this.nombre + " " + this.apellido;
+                    },
+                    decirComidaFavorita: function() {
+                        return "Mi comida favorita es: " + this.comidaFavorita;
+                    }
+                };
+                return per;
+            }
+
+            var per1 = crearPersona("Diego", "Gomez", "Ensalada de fruta");
+            var per2 = crearPersona("Fabiana", "Vilafañe", "Brocoli con arroz");
+            var per3 = crearPersona("Karina", "Hernandez", "Tomates rellenos");
+            
+            var personas = [ per1, per2, per3 ];
+
+            for(var i = 0; i < personas.length; i++){
+                per = personas[i];
+                document.write("<p>" + per.saludar() + "</p>");
+                document.write("<p>" + per.decirComidaFavorita() + "</p>"); 
+            }
+
+        </script>
+    </body>
+</html>

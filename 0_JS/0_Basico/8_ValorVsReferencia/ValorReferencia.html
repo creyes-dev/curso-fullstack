@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Valor vs Referencia</title>
+    </head>
+    <body>
+        <script>
+            
+            // estructuras primitivas (copiadas por valor): 
+            //      null
+            //      undefined
+            //      number
+            //      string
+            //      boolean
+
+            // objetos (copiados por referencia)
+            //      object
+            //      array
+            //      function
+
+            console.log("Cuando copiamos primitivos a una variable, copiamos su valor");
+
+            var a = 5;
+            var b = a;
+            a = 10;
+            console.log(a); // 10
+            console.log(b); // 5
+
+            console.log("Cuando copiamos objetos a una variable, copiamos su referencia");
+
+            var a = [];
+            var b = a;
+            
+            a.push(1)
+
+            console.log(a); // [1]
+            console.log(b); // [1]
+            console.log(a === b); // true
+            
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+   <title>callback que se suscribe a la finalización de una animación</title>
+   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    // No animara el desplazamiento despues del fadeout,
+    // El fadeIn se iniciara cuando finalice el fadeout
+
+    //$("#micapa").fadeOut(2000);
+    //$("#micapa").css({margin: 300, left:200});
+    //$("#micapa").fadeIn(2000);
+
+    $("#micapa").fadeOut(1000, function(){
+        $("#micapa").css({'margin-left': 300, 'margin-top':200});
+        $("#micapa").fadeIn(1000);
+    });
+});
+
+</script>
+</head>
+<body>
+    <div id="micapa">
+        <p>Elemento 1</p>
+        <input type="text" value="textbox" />
+        <input type="button" value="boton1" />
+    </div>
+</body>
+</html>
