@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Trabajando con eventos de teclado en jQuery</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+   $("#mitexto").keypress(function(e){
+      e.preventDefault();
+      $("#loescrito").html(e.which + ": " + String.fromCharCode(e.which))
+   });
+})
+</script>
+
+</head>
+<body>
+<h1>Eventos de teclado en jQuery</h1>
+   <h2>Averiguar qué tecla se está pulsando</h2>
+   <form>
+      <textarea cols=300 rows=2 id="mitexto">Escribe algo aquí!</textarea>
+      <br>
+      <b>Tecla pulsada:</b>
+      <br>
+      <div id="loescrito"></div>
+   </form>
+</body>
+</html> 

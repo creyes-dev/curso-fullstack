@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Trabajando con eventos</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	// la función callback a ejecutar al hacer click, tiene un
+	// parámetro que es el evento clic que estamos manejando.	
+	$(".mienlace").click(function(e){
+		e.preventDefault();
+		alert("Has hecho clic\nComo he hecho preventDefault, no te llevaré a Google.com");
+	});
+})
+</script>
+
+</head>
+<body>
+    <h1>Trabajando con eventos en jQuery</h1>
+	<a class="mienlace" href="http://www.google.com/">Hazme clic, pero no te llevaré a mi href</a>
+	<br>
+	<a class="mienlace" href="http://www.google.com/">Hazme clic, pero no te llevaré tampoco</a>
+</body>
+</html>
