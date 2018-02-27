@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>Cola de efectos por defecto en jQuery</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<style type="text/css">
+body{
+   font-size: 0.75em;
+   font-family: tahoma, verdana, sans-serif;
+}
+.notar{
+   color: #339;
+}
+#mensaje{
+   margin: 20px 5px;
+}
+#micapa{
+   left: 200px;
+   top: 150px;
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   background-color: #3d3;
+}
+</style>
+<script languague="javascript">
+function muestraRestantesCola(){
+   var numFuncionesEnCola = $("#micapa").queue().length;
+   $("#mensaje").text("En el momento de hacer el último clic en los botones hay " + numFuncionesEnCola + " funciones de efectos en cola");
+}
+$(document).ready(function(){
+   $("#botonfade").click(function(){
+      capa = $("#micapa");
+      capa.fadeOut(500);
+      capa.fadeIn(500);
+      muestraRestantesCola();
+   });
+   $("#botonslide").click(function(){
+      capa = $("#micapa");
+      capa.slideUp(500);
+      capa.slideDown(500);
+      muestraRestantesCola();
+   });
+   $("#botontamanocola").click(function(){
+      muestraRestantesCola();
+   });
+});
+</script>
+
+</head>
+<body>
+   <button id="botonfade">Muestra y luego oculta con fadeIn y fadeOut</button>
+   <button id="botonslide">Muestra y luego oculta con slideUp slideDown</button>
+   <button id="botontamanocola">Muestra el número de funciones en cola ahora mismo</button>
+   <div id="mensaje">
+      En estos momentos no hay funciones de efectos en la cola por defecto.
+      <br>
+      <span class="notar">Pulsa repetidas veces los botones de arriba para ir metiendo funciones en la cola</span>
+   </div>
+<div id="micapa"></div>
+</body>
+</html> 
