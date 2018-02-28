@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Evaluación Módulo 1 – Unidad 2</title>
+        <style>
+
+            body {
+                background-color: black;
+            }
+
+            .contenido {
+                background-image: url(fondo1.jpg);
+                background-repeat:  no-repeat;
+                width: 1800px;
+                height: 900px;
+                margin: auto;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .wrapper {
+                padding: 75px;
+                overflow: auto;
+            }
+
+            .contenedor-empresas {
+                font-size: 24px;
+                width: 200px;
+                float: left;
+            }
+
+            .contenedor-empresas .empresa {
+                margin-bottom: 70px;
+            }
+
+            .contenedor-texto {
+                color: white;
+                background-color: black;
+                margin-left: 400px;
+                padding-left: 30px;
+                padding-right: 30px;
+                padding-top: 50px;
+                padding-bottom: 50px;
+                width: 800px;
+                font-size: 21px;
+            }
+
+            .contenedor-texto .contacto {
+                color: red;
+                font-weight: bold;
+                text-align: right;
+                font-size: 21px;
+                margin-top: 120px;
+            }
+
+            .contenedor-contacto {
+                color: white;
+                background-color: red;
+                margin-left: 400px;
+                padding-left: 30px;
+                padding-right: 30px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                width: 800px;
+                font-size: 21px;
+                display: none;
+            }
+
+            .contenedor-contacto p {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            #empresa-sdi {
+                color: white;
+                width: 200px;
+            }
+
+            #empresa-riel {
+                color: red;
+                width: 100px;
+            }
+
+        </style>
+
+        <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".contacto span").mouseenter(function(){
+                    $(".contenedor-contacto").css("display","block");
+                });
+                $(".contacto span").mouseleave(function() {
+                    $(".contenedor-contacto").css("display","none");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="contenido">
+
+            <div class="wrapper">
+                <aside class="contenedor-empresas">                
+                    <div id="empresa-sdi" class="empresa">
+                        <img src="logo.png" alt="sdi" />
+                        <p>REPRESENTANTE OFICIAL</p>
+                    </div>
+                    <div id="empresa-riel" class="empresa">
+                         <img src="rielamericano.png" alt="riel americano" />
+                         <p>MIRAR TIENE SENTIDO</p>
+                    </div>
+                </aside>
+                <section class="contenedor-texto">
+                    <article>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Leatrset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including version of Lorem Ipsum
+                        </p>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Leatrset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including version of Lorem Ipsum
+                        </p>
+                    </article>
+                    <footer class="contacto">
+                        <span>Ver datos de contacto</span>
+                    </footer>
+                </section>
+                <section class="contenedor-contacto">
+                    <p>Mendoza 3456 - CABA</p>
+                    <p>54 11 4521-6778</p>
+                    <p>informes@misitio.com.ar</p>
+                </section>
+            </div>
+
+        </div>
+    </body>
+</html>
+
