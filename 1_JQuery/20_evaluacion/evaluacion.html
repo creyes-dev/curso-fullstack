@@ -25,12 +25,16 @@
 
             .contenedor-empresas {
                 font-size: 24px;
-                width: 200px;
+                width: 220px;
                 float: left;
             }
 
             .contenedor-empresas .empresa {
                 margin-bottom: 70px;
+            }
+
+            .contenedor-empresas div {
+                display: none;
             }
 
             .contenedor-texto {
@@ -43,6 +47,7 @@
                 padding-bottom: 50px;
                 width: 800px;
                 font-size: 21px;
+                display: none;
             }
 
             .contenedor-texto .contacto {
@@ -71,12 +76,12 @@
                 margin-bottom: 5px;
             }
 
-            #empresa-sdi {
+            #empresa-sdi-texto {
                 color: white;
                 width: 200px;
             }
 
-            #empresa-riel {
+            #empresa-riel-texto {
                 color: red;
                 width: 100px;
             }
@@ -88,9 +93,13 @@
 
             $(document).ready(function(){
 
-                $("#empresa-sdi").slideDown(2000, function() {
-                    $(".contenedor-texto").fadeTo(2000,0.8, function(){
-                        $("#empresa-sdi").slideDown(2000);
+                $("#empresa-sdi-logo").slideDown(2000, function() {
+                    $("#empresa-sdi-texto").slideDown(2000, function(){
+                        $("#empresa-riel-logo").slideDown(2000, function() {
+                            $("#empresa-riel-texto").slideDown(2000, function(){
+                                $(".contenedor-texto").fadeTo(2000, 0.8);
+                            });
+                        });
                     });
                 });
 
@@ -101,7 +110,6 @@
                 $(".contacto span").mouseleave(function() {
                     $(".contenedor-contacto").css("display","none");
                 });
-
             });
         </script>
     </head>
@@ -110,13 +118,17 @@
 
             <div class="wrapper">
                 <aside class="contenedor-empresas">                
-                    <div id="empresa-sdi" class="empresa">
+                    <div id="empresa-sdi-logo">
                         <img src="logo.png" alt="sdi" />
+                    </div>
+                    <div id="empresa-sdi-texto">
                         <p>REPRESENTANTE OFICIAL</p>
                     </div>
-                    <div id="empresa-riel" class="empresa">
-                         <img src="rielamericano.png" alt="riel americano" />
-                         <p>MIRAR TIENE SENTIDO</p>
+                    <div id="empresa-riel-logo">
+                        <img src="rielamericano.png" alt="riel americano" />
+                    </div>
+                    <div id="empresa-riel-texto">
+                        <p>MIRAR TIENE SENTIDO</p>
                     </div>
                 </aside>
                 <section class="contenedor-texto">
