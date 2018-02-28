@@ -85,13 +85,23 @@
 
         <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
         <script>
+
             $(document).ready(function(){
+
+                $("#empresa-sdi").slideDown(2000, function() {
+                    $(".contenedor-texto").fadeTo(2000,0.8, function(){
+                        $("#empresa-sdi").slideDown(2000);
+                    });
+                });
+
                 $(".contacto span").mouseenter(function(){
                     $(".contenedor-contacto").css("display","block");
                 });
+
                 $(".contacto span").mouseleave(function() {
                     $(".contenedor-contacto").css("display","none");
                 });
+
             });
         </script>
     </head>
