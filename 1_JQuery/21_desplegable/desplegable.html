@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+$(document).ready(function(){
+   $("#opcion2").mouseleave(function(event){
+    event.preventDefault();
+    $("#desplegable2").slideUp();
+   });
+
+   $("#opcion2").mouseenter(function(event){
+    event.preventDefault();
+    $("#desplegable2").slideDown();
+   });
+   
+   $("#opcion3").mouseleave(function(event){
+    event.preventDefault();
+    $("#desplegable3").slideUp();
+   });
+
+   $("#opcion3").mouseenter(function(event){
+    event.preventDefault();
+    $("#desplegable3").slideDown();
+   });
+   
+});
+</script>
+
+<style type="text/css">
+ul.menu{
+	list-style-type:none;
+	margin:0;
+	padding:0;  
+	display:block;
+}
+
+ul.menu li{
+	width:120px;
+  text-align:center;		
+	/*text-transform:uppercase;*/
+	font-weight:bold;
+	float:left;
+	display:block;	
+}
+
+ul.menu li:hover{
+  background-image: url("glossyback2.gif");
+}
+
+ul.menu li ul{
+	display:none;
+	margin:0;
+	padding:0;
+}
+
+a:link,a:visited{
+	display:block;
+  padding: 10px 0 10px 0;
+	color:#FFFFFF;
+  background-image: url("glossyback.gif");
+  text-decoration:none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover,a:active{
+  background-image: url("glossyback2.gif");
+  padding: 10px 0 10px 0;
+}
+
+</style>
+</head>
+
+<body>
+<ul class="menu">
+<li id="opcion1"><a href="#principal">Principal</a></li>
+<li id="opcion2"><a href="#ropa">Ropa</a>
+	<ul id="desplegable2">
+    	<li><a href="#">Deportiva</a></li>
+    	<li><a href="#">Vestir</a></li>
+    	<li><a href="#">Fiesta</a></li>                
+    </ul>
+</li>
+<li id="opcion3"><a href="#accesorios">Accesorios</a>
+	<ul id="desplegable3">
+    	<li><a href="#">Zapatos</a></li>
+    	<li><a href="#">Carteras</a></li>
+    	<li><a href="#">Bijoux</a></li>               
+    </ul>
+</li>
+<li id="opcion4"><a href="#contacto">Contacto</a></li>
+</ul>
+</body>
+</html>

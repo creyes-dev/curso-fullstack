@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+				
+		function animacion(){
+			$("#foto1").animate({"left": "+=600px"}, 4000, function(){
+				$("#foto2").animate({"left": "+=600px"}, 4000, function(){
+					$("#foto3").animate({"left": "+=600px"}, 4000, function(){
+						$("#foto1").css("left", "0")
+						$("#foto2").css("left", "0")
+						$("#foto3").css("left", "0")
+						
+						animacion();
+			})})});
+		}
+		animacion();
+
+	});
+</script>
+<style type="text/css">
+	#imagenes{
+		width: 600px;
+		height: 450px;
+		border: 1px solid grey;
+		position: relative;
+		overflow: hidden;
+		background-image: url(foto1.jpg)
+	}
+	#foto1, #foto2, #foto3{
+		display: block;
+		position: absolute;
+	}
+	
+</style>
+</head>
+
+<body>
+<h2>Slider</h2>
+<div id="imagenes">
+    <img src="foto3.jpg" id="foto3" />
+    <img src="foto2.jpg" id="foto2" />
+    <img src="foto1.jpg" id="foto1" />
+    
+</div>
+</body>
+</html>

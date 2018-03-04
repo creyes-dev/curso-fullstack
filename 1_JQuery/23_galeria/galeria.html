@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$("#container img").click(function(){
+			var nombre = $(this).attr("alt") + "_big";
+			var direccion = nombre + ".jpg";
+
+			$("#imgFull").attr('src',direccion);
+			$("#previa").fadeIn();
+		});
+		
+		$("#imgFull").click(function(){
+			$("#previa").fadeOut();	
+		});
+	});
+</script>
+<style type="text/css">
+	body{
+		background-image: url('fondo.png');
+	}
+	#container{
+		width: 650px;
+		margin: 150px auto;
+	}
+	#container img{
+		cursor: pointer;
+	}
+	#previa{
+		background: rgba(0,0,0,0.5);
+		display: none;
+		height: 100%;
+		left: 0;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		overflow: scroll;
+	}
+	#previa div{
+		margin: 30px auto;
+		text-align: center;
+	}
+	
+	
+</style>
+</head>
+
+<body>
+<div id="previa">
+	<div>
+		<img src="" id="imgFull" />
+	</div>	
+</div>
+<div id="container">
+	<img src="foto_1_small.jpg" alt="foto_1" width="100" height="75" />
+    <img src="foto_2_small.jpg" alt="foto_2" width="100" height="75" />
+    <img src="foto_3_small.jpg" alt="foto_3" width="100" height="75" />
+    <img src="foto_4_small.jpg" alt="foto_4" width="100" height="75" />
+    <img src="foto_5_small.jpg" alt="foto_5" width="100" height="75" />
+    <img src="foto_6_small.jpg" alt="foto_6" width="100" height="75" />
+</div>
+</body>
+</html>
