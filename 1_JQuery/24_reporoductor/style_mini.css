@@ -1,0 +1,48 @@
+#mediaplayer_style{
+    background: url(img/repro.png) no-repeat;
+    width: 288px;
+    height: 170px;
+    margin: 0 330px;
+    padding: 0;
+    position: absolute;
+}
+.logo_radio{
+    width: 101px;
+    height: 106px;
+    z-index: 2;
+    margin: 20px 0px 0px 20px;
+    position: absolute;
+}
+.play_stop{
+    width: 59px;
+    height: 59px;
+    margin: 18px 0px 0px 110px;
+    z-index: 2;
+    position: absolute;
+}
+.play{
+    background: url(img/play.png);
+    height: 59px;
+    width:59px;
+    z-index: 7;
+}
+
+.stop{
+    background: url(img/stop.png);
+    height: 59px;
+    width:59px;
+    z-index: 7;
+}
+
+.volup{
+    width: 64px;  
+    height: 54px;  
+    margin: 22px 0px 0px 163px;
+    position: absolute;
+}
+
+.-vol{
+    width: 64px;  height: 54px;  
+    margin: 14px 0px 0px 51px;
+    position: absolute;
+}
