@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<title>Evaluación Módulo 1 – Unidad 3</title>
 <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 	
@@ -10,17 +10,22 @@
 		
 		function animacion(){
 			$("#texto3").slideDown(4000, function(){
-				$("#texto3").css("display", "none")
+				$("#texto3").css("display", "none");
 				$("#texto2").slideDown(4000, function(){
 					$("#texto2").css("display", "none")
 					$("#texto1").slideDown(4000, function(){
 						$("#texto1").css("display", "none")
-						
 			})})});
 			
+			$("#cuadrado3-fondo").fadeIn(4000);
 			$("#foto3").animate({"left": "+=600px"}, 4000, function(){
+				$("#cuadrado3-fondo").css("display", "none");
+				$("#cuadrado2-fondo").fadeIn(4000);
 				$("#foto2").animate({"left": "+=600px"}, 4000, function(){
+					$("#cuadrado2-fondo").css("display", "none");
+					$("#cuadrado1-fondo").fadeIn(4000);
 					$("#foto1").animate({"left": "+=600px"}, 4000, function(){
+						$("#cuadrado1-fondo").css("display", "none");
 						$("#foto3").css("left", "0")
 						$("#foto2").css("left", "0")
 						$("#foto1").css("left", "0")
@@ -58,22 +63,33 @@
 		opacity: 0.3;
 		filter: alpha(opacity=30);
 	}
-	#contenedor-cuadrados {
-		margin-left: auto;
-		margin-right: auto;
+	
+	.contenedor-cuadrados{
+		padding-top: 20px;
+		width: 600px;
+		height: 30px;
+		display: block;
 	}
 
 	.cuadrados{
-		margin-top: 20px;
+		display: block;
+		width: 85px;
+		margin: auto;
 	}
 
 	.cuadrado {
 		width: 20px;
 		height: 20px;
-		background-color: #FFFFFF;
 		border: 1px solid #000000;
 		float: left;
 		margin-right: 5px;
+	}
+
+	.cuadrado-fondo {
+		width: 20px;
+		height: 20px;
+		display: none;
+		background-color: grey;
 	}
 	
 </style>
@@ -87,13 +103,21 @@
 		<img src="imagenes/foto1.jpg" class="foto" id="foto3" />
 		<div id="texto1">Esta es la descripcion de la foto 1</div>
 		<div id="texto2">Esta es la descripcion de la foto 2</div>
-		<div id="texto3">Esta es la descripcion de la foto 3</div>
-</div>
-<div id="cuadrados">
-	<div id="cuadrado1" class="cuadrado"></div>
-	<div id="cuadrado2" class="cuadrado"></div>
-	<div id="cuadrado3" class="cuadrado"></div>
-</div>
+		<div id="texto3">Esta es la descripcion de la foto 3</div>		
+	</div>
 
+	<div class="contenedor-cuadrados">
+		<div class="cuadrados">
+			<div id="cuadrado1" class="cuadrado">
+				<div id="cuadrado1-fondo" class="cuadrado-fondo"></div>
+			</div>
+			<div id="cuadrado2" class="cuadrado">
+				<div id="cuadrado2-fondo" class="cuadrado-fondo"></div>
+			</div>
+			<div id="cuadrado3" class="cuadrado">
+				<div id="cuadrado3-fondo" class="cuadrado-fondo"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

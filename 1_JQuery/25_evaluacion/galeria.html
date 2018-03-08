@@ -2,23 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<title>Evaluación Módulo 1 – Unidad 3</title>
 <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function(){
 		$("#container img").click(function(){
+			var titulo = $(this).attr("title");
 			var nombre = $(this).attr("alt") + "_big";
 			var direccion = "imagenes/" + nombre + ".jpg";
-
+			
 			$("#imgFull").attr('src',direccion);
+			$("#previa .contenedor-imagen .titulo").html(titulo)
 			$("#previa").fadeIn();
-		});
-		
-		$("#imgFull").click(function(){
-			$("#previa").fadeOut();	
+
+			$("#previa .contenedor-imagen .cerrar").click(function(e){
+				e.preventDefault();
+				$("#previa").fadeOut();	
+			});
 		});
 	});
+
 </script>
 <style type="text/css">
 	body{
@@ -41,28 +45,38 @@
 		width: 100%;
 		overflow: scroll;
 	}
-	#previa div{
+	.contenedor-imagen{
 		margin: 30px auto;
 		text-align: center;
 	}
-	
+	.contenedor-imagen .titulo {
+		margin-top: 10px;
+		display: block;
+	}
+	.contenedor-imagen .cerrar {
+		position: absolute;
+		margin-left: -35px;
+	}
+
 	
 </style>
 </head>
 
 <body>
 <div id="previa">
-	<div>
+	<div class="contenedor-imagen">
+		<a href="#" class="cerrar"><img src="imagenes/close.gif"></a>
 		<img src="" id="imgFull" />
-	</div>	
+		<span class="titulo"></span>
+	</div>
 </div>
 <div id="container">
-	<img src="imagenes/foto_1_small.jpg" alt="foto_1" width="100" height="75" />
-    <img src="imagenes/foto_2_small.jpg" alt="foto_2" width="100" height="75" />
-    <img src="imagenes/foto_3_small.jpg" alt="foto_3" width="100" height="75" />
-    <img src="imagenes/foto_4_small.jpg" alt="foto_4" width="100" height="75" />
-    <img src="imagenes/foto_5_small.jpg" alt="foto_5" width="100" height="75" />
-    <img src="imagenes/foto_6_small.jpg" alt="foto_6" width="100" height="75" />
+	<img src="imagenes/foto_1_small.jpg" title="princesa hombre" alt="foto_1" />
+    <img src="imagenes/foto_2_small.jpg" title="duende verde" alt="foto_2" />
+    <img src="imagenes/foto_3_small.jpg" title="terminator" alt="foto_3"  />
+    <img src="imagenes/foto_4_small.jpg" title="hombre maquillado" alt="foto_4"  />
+    <img src="imagenes/foto_5_small.jpg" title="extraterrestre" alt="foto_5" />
+    <img src="imagenes/foto_6_small.jpg" title="homero" alt="foto_6" />
 </div>
 </body>
 </html>
