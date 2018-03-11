@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+   <title>foreach jquery</title>
+   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        $("div").each(function(i){
+        elemento = $(this);
+        if(elemento.html() == "white")
+            return true;
+        if(elemento.html() == "nada")
+            return false;
+        elemento.css("color", elemento.html());
+        }); 
+    });
+
+</script>
+</head>
+<body>
+    <div>red</div>
+    <div>blue</div>
+    <div>red</div>
+    <div>white</div>
+    <div>red</div>
+    <div>green</div>
+    <div>orange</div>
+    <div>red</div>
+    <div>nada</div>
+    <div>red</div>
+    <div>blue</div> 
+</body>
+</html>
+
