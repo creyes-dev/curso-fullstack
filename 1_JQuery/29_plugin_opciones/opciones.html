@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Trabajando con plugins en jQuery - Tip simple</title>
+<style type="text/css">
+   .tip{
+      background-color: #ffcc99;
+      padding: 10px;
+      display: none;
+      position: absolute;
+	  width: 200px;
+   }
+   .otroestilotip{
+      background-color: #cccf49;
+      padding: 10px;
+      display: none;
+      position: absolute;
+	  width: 240px;
+   }
+</style>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script src="jquery.creatips.js"></script>
+<script>
+	$(document).ready(function(){
+//llamado a creaTip sin opciones, o sea que toma las opciones de configuracion por defecto	
+//		$("#elemento1").creaTip("todo bien...");
+//		$("#elemento2").creaTip("Otra prueba...");
+
+		$("#elemento1").creaTip("todo bien...");
+		$("#elemento2").creaTip("Otra prueba...", {
+			velocidad: 1000,
+			claseTip: "otroestilotip",
+			animacionMuestra: {
+				opacity: "show",
+				padding: '25px',
+				'font-size': '2em'
+			},
+			animacionOculta: {
+				height: "hide",
+				padding: '5px',
+				'font-size': '1em'
+			}
+		});
+	})
+</script>
+
+</head>
+<body>
+<h1>Trabajando con plugins en jQuery - tip simple</h1>
+
+<div id="elemento1" style="background-color: #ccccff; padding: 5px;">Pasa el ratón por encima de esta capa...</div>
+<p>Este texto es para poner <a id="elemento2" href="#">este enlace que también tiene tip</a>.</p>
+
+</body>
+</html> 
