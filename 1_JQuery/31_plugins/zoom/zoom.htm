@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Ejemplo JQuery zoom</title>
+
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<link rel="stylesheet"  type="text/css" href="jqzoom.css">
+	<script type="text/javascript" src="jquery.jqzoom1.0.1.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+			var opts =
+			{
+				zoomWidth: 250,
+				zoomHeight: 250,
+				showEffect:'show',
+				hideEffect:'fadeout',
+				fadeoutSpeed: 'slow',
+				title : true
+			}
+			$(".jqzoom").jqzoom(opts);
+
+	});
+	</script>
+
+</head>
+
+
+<body>
+
+		<a href="poster.jpg" class="jqzoom" title="Prueba de Zoom">
+			<img src="poster_small.jpg" style="border: 1px solid #666;">
+		</a>
+
+</body>
+	
+</html>

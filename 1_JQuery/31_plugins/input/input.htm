@@ -1,0 +1,82 @@
+
+<html>
+
+<head>
+
+<title>Ejemplo jQuery AlphaNumeric</title>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.alphanumeric.pack.js"></script>
+
+<script type="text/javascript">
+
+
+$(document).ready( function() {
+
+	$('.sample1').alphanumeric();
+
+	$('.sample2').alphanumeric({allow:"., "});
+
+	$('.sample3').alpha({nocaps:true});
+
+	$('.sample4').numeric();
+
+	$('.sample5').numeric({allow:".,"});
+
+	$('.sample6').alphanumeric({ichars:'.aA'});
+
+} );
+
+
+
+</script>
+
+</head>
+
+<body>
+
+
+
+
+
+        <b>Sólo alfanumérico</b>
+      	<input type="text" class="sample1" size="10" />
+		<div class="code">$('.sample1').alphanumeric();</div>
+
+		<br />
+        <b>Alfanumérico además de "., "</b>
+      	<input type="text" class="sample2" size="10" />
+		<div class="code">$('.sample2').alphanumeric({allow:"., "});</div>
+
+		<br />
+        <b>Sólo minúsculas</b>
+      	<input type="text" class="sample3" size="10" />
+		<div class="code">$('.sample3').alpha({nocaps:true});</div>
+
+
+		<br />
+        <b>Sólo numérico</b>
+     	<input type="text" class="sample4" size="10" />
+		<div class="code">$('.sample4').numeric();</div>
+
+		<br />
+        <b>Numérico con punto o coma</b>
+      	<input type="text" class="sample5" size="10" />
+		<div class="code">$('.sample5').numeric({allow:",."});</div>
+
+ 		<br />
+        <b>Prohibir el punto y la a</b>
+      	<input type="text" class="sample6" size="10" />
+		<div class="code">$('.sample6').alphanumeric({ichars:".aA"});</div>
+
+
+<hr />
+
+
+http://itgroup.com.ph/alphanumeric/
+
+
+</body>
+
+</html>
+

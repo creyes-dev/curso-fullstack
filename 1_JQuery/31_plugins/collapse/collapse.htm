@@ -1,0 +1,61 @@
+<html>
+<head>
+
+<title>JQuery Collapse</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function()
+{
+
+	$("#mostrar").click(function(event) {
+	event.preventDefault();
+	$("#caja").slideDown();
+	});
+
+	$("#caja a.close").click(function(event) {
+	event.preventDefault();
+	$("#caja").slideUp();
+	});
+
+});
+
+</script>
+
+<style type="text/css">
+body {
+	font-family: Verdana;
+	font-size: 11px;
+	color: #666666;	
+}
+a{color:#993300; text-decoration:none;}
+
+#caja {
+	width:70%;
+	display: none; /* comienza cerrada */
+	padding:5px;
+	border:2px solid #FADDA9;
+	background-color:#FDF4E1;
+}
+
+#mostrar{
+	display:block;
+	width:70%;
+	padding:5px;
+	border:2px solid #D0E8F4;
+	background-color:#ECF8FD;
+}
+</style>
+
+</head>
+
+<body>
+	<a href="#" id="mostrar">MOSTRAR</a>
+
+	<div id="caja">
+		<a href="#" class="close">[cerrar]</a>
+		<p>contenido de la div <a href="#">con un link también</a></p>
+	</div>
+
+</body>
+</html>
