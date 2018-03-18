@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Datepicker</title>
+	<link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+<!--	<script type="text/javascript" src="jquery.ui.datepicker-es.js"></script>-->
+	<script>
+	$(function() {
+		
+			
+		$( "#datepicker" ).datepicker({
+			inline: true
+		});
+	
+
+		$( "#datepicker2" ).datepicker({
+		});
+
+		$( "#datepicker3" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+
+		$( "#datepicker4" ).datepicker({
+			numberOfMonths: 3,
+			showButtonPanel: true
+		});
+		
+		$( "#datepicker5" ).datepicker({
+			dateFormat: "dd/mm/yy"
+		});
+		
+		$( "#datepicker6" ).datepicker({
+			minDate: -20, 
+			maxDate: "+1M +10D"
+		});
+		
+		//------------- seleccionar fecha desde / fecha hasta
+		$( "#from" ).datepicker({
+			defaultDate: "+1w",
+			changeMonth: true,
+			numberOfMonths: 3,
+			onClose: function( selectedDate ) {
+				$( "#to" ).datepicker( "option", "minDate", selectedDate );
+			}
+		});
+		
+		$( "#to" ).datepicker({
+			defaultDate: "+1w",
+			changeMonth: true,
+			numberOfMonths: 3,
+			onClose: function( selectedDate ) {
+				$( "#from" ).datepicker( "option", "maxDate", selectedDate );
+			}
+		});
+		//--------------------------------------------
+	});
+	</script>
+	<style>
+	body{
+		font: 62.5% "Trebuchet MS", sans-serif;
+		margin: 50px;
+	}
+	.demoHeaders {
+		margin-top: 2em;
+	}
+	
+	</style>
+</head>
+<body>
+
+
+<!-- Datepicker -->
+<h2 class="demoHeaders">Datepicker en línea</h2>
+<div id="datepicker"></div>
+
+<h2 class="demoHeaders">Datepicker funcionamiento por defecto</h2>
+<div>Date: <input type="text" id="datepicker2" /></div>
+
+<h2 class="demoHeaders">Datepicker mostrando menu de año y mes</h2>
+<div>Date: <input type="text" id="datepicker3" /></div>
+
+<h2 class="demoHeaders">Datepicker mostrando multiples meses</h2>
+<div>Date: <input type="text" id="datepicker4" /></div>
+
+<h2 class="demoHeaders">Datepicker con fecha formateada</h2>
+<div>Date: <input type="text" id="datepicker5" /></div>
+
+<h2 class="demoHeaders">Datepicker restringiendo un rango de fechas</h2>
+<div>Date: <input type="text" id="datepicker6" /></div>
+
+<h2 class="demoHeaders">Seleccionar desde una fecha hasta otra fecha</h2>
+<label for="from">From</label>
+<input type="text" id="from" name="from" />
+<label for="to">to</label>
+<input type="text" id="to" name="to" />
+
+</body>
+</html>

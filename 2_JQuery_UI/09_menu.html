@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Menú</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <!-- Observa que definimos el ancho de los menúes en la clase CSS 'ui-menu' -->
+    <style type="text/css">
+        body { background-color:lightyellow;font-family:Arial;font-size:10pt; }
+        .ui-menu { width:120px; }
+    </style>
+    
+    <!-- Observa que agregamos también la librería JQuery UI -->
+    <script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+    
+    <!-- Agregamos también el archivo CSS del theme que usemos -->
+	<link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+        
+    <script type="text/javascript">
+        
+        $(document).ready(function()
+        {
+            $( "#menu" ).menu();
+        });
+
+    </script>
+  </head>
+
+  <body>    
+
+        <ul id="menu">
+            <li><a href="#">Opción A</a></li>
+            <li class="ui-state-disabled"><a href="#">Opción B</a></li>
+            <li><a href="#">Opción C</a></li>
+            
+            <li>
+                <a href="#">Opción D</a>
+                <ul>
+                  <li><a href="#">Opción D1</a></li>
+                  <li><a href="#">Opción D2</a></li>
+                  <li class="ui-state-disabled"><a href="#">Opción D3</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Opción E</a></li>
+            
+            <li>
+                <a href="#">Opción F</a>
+                <ul>
+                    <li>
+                        <a href="#">Opción F1</a>
+                        <ul>
+                          <li><a href="#">Opción F1-1</a></li>
+                          <li><a href="#">Opción F1-2</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Opción F2</a></li>
+                </ul>
+          </li>
+        </ul>
+    
+  </body>
+
+</html>

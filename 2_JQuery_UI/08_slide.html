@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>Slider con JQuery UI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <style type="text/css">
+        body { background-color:lightyellow;font-family:Arial;font-size:10pt; }
+        #log { color:yellow;background-color:red;margin-bottom:10px; }
+        #slider { width:200px;margin:20px 0px 20px 100px; }
+    </style>
+    
+    <!-- Observa que agregamos también la librería JQuery UI -->
+    <script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+    
+    <!-- Agregamos también el archivo CSS del theme que usemos -->
+    <link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+        
+    <script type="text/javascript">
+        
+        $(document).ready(function()
+        {
+            // Mostrar el slider
+            $("#slider").slider( {min:100,
+                                  max:1000, 
+                                  value:300,
+                                  slide:movimiento,
+                                  change:cambiado,
+                                  stop:parado
+                               });
+            
+            // Aplicar al slider un valor introducido
+            $("#btnEstablecer").click(function()
+            {
+                var valor = $("#establecer").val();
+                $("#slider").slider( {value : valor} );
+            })
+        });
+        
+        // ---------------
+        
+        // A cada movimiento del deslizador sin soltar el botón
+        function movimiento( event, ui )
+        {
+            $("#log").append("slide ");
+            
+            $("#mover").attr("value", ui.value );
+        }
+
+        // ---------------
+        
+        // Después de soltar el botón y después de producirse el evento 'stop'
+        function cambiado( event, ui )
+        {
+            $("#log").append("change ");
+            
+            $("#mostrar").attr("value", ui.value);
+        }
+        
+        // ---------------
+        
+        // Justo después de soltar el botón y antes de producirse el evento 'change'
+        function parado( event, ui )
+        {
+            $("#log").append("stop ");
+        }
+
+    </script>
+  </head>
+
+  <body>    
+
+      <div id="log"> </div>
+      
+      <p>Usa el desplazador:</p>
+      
+      <div id="slider"></div>
+
+      <label for="mostrar">Valor al mover:</label>
+      <input type="text" id="mover" size="4" value="" readonly="readonly" />
+      
+      <label for="mostrar">Valor actual:</label>
+      <input type="text" id="mostrar" size="4" value="" readonly="readonly" />
+      
+      <p>Introduce un número del 1 al 1000 y pulsa el botón:</p>
+      
+      <input type="text" id="establecer" size="4" value="500" />
+      <input type="button" id="btnEstablecer" value="Aplicar" />
+    
+  </body>
+
+</html>

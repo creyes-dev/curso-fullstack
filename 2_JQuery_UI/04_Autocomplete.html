@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Autocomplete - Funcionamiento por defecto</title>
+	<script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
+    <link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<script>
+	
+	//Caso 1
+	$(function() {
+		var availableTags = [
+			"ActionScript",
+			"AppleScript",
+			"Asp",
+			"BASIC",
+			"C",
+			"C++",
+			"Clojure",
+			"COBOL",
+			"ColdFusion",
+			"Erlang",
+			"Fortran",
+			"Groovy",
+			"Haskell",
+			"Java",
+			"JavaScript",
+			"Lisp",
+			"Perl",
+			"PHP",
+			"Python",
+			"Ruby",
+			"Scala",
+			"Scheme"
+		];
+		$( "#tags" ).autocomplete({
+			source: availableTags
+		});
+	});
+	</script>
+</head>
+<body>
+
+<h2 class="demoHeaders">Funcionamiento por defecto</h2>
+
+<div class="ui-widget">
+	<label for="tags">Tags: </label>
+	<input id="tags">
+</div>
+
+</body>
+</html>
