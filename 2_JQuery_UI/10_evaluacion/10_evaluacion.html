@@ -9,6 +9,7 @@
         
         <!-- Agregamos también el archivo CSS del theme que usemos -->
         <link href="css/start/jquery-ui.css" rel="stylesheet">
+        <link href="css/start/jquery.ui.theme.css" rel="stylesheet">
 
         <style>
                     
@@ -69,15 +70,19 @@
             }
 
             label {
-            position: relative;
+				position: relative;
             }
 
             label em {
-            position: absolute;
-            right: 5px;
-            top: 20px;
+				position: absolute;
+				right: 5px;
+				top: 20px;
             }
-                    
+
+            #confirmacion {
+                display: none;
+            }
+                                
         </style>
 
         <script type="text/javascript">
@@ -138,7 +143,6 @@
                     if (!reNombre.test(nombre.value)) 
                     {
                         alert('Debe ingresar un nombre válido');
-                        nombre.focus(); 
                         return false;
                     }
                     else
@@ -155,7 +159,6 @@
                 if(apellido.value == "")
                 {
                     alert('Por favor ingrese su apellido');
-                    apellido.focus();
                     return false;
                 }
                 else
@@ -165,7 +168,6 @@
                     if (!reApellido.test(apellido.value)) 
                     {
                         alert('Debe ingresar un apellido válido');
-                        apellido.focus();
                         return false;
                     }
                     else
@@ -182,7 +184,6 @@
                 if(fechaNacimiento.value == "")
                 {
                     alert('Por favor ingrese su fecha de nacimiento');
-                    fechaNacimiento.focus();
                     return false;
                 }
                 else
@@ -192,7 +193,6 @@
                     if (!reFechaNacimiento.test(fechaNacimiento.value)) 
                     {
                         alert('Debe ingresar una fecha de nacimiento válida, se requiere un formato dd/mm/aaaa en el que el día y el mes pueden tener 1 dígito pero el año debe contar con 4 dígitos');
-                        fechaNacimiento.focus();
                         return false; 
                     }
                     else
@@ -207,7 +207,6 @@
 						
 						if(fecha.getFullYear() != anioIngresado || fecha.getMonth() != mesIngresado || fecha.getDate() != diaIngresado){
 							alert('Por favor ingrese una fecha de nacimiento válida');
-							fechaNacimiento.focus();
 							return false;
 						}
 						else 
@@ -216,7 +215,6 @@
 							var fechaActual = new Date();
 							if(fecha >= fechaActual) {
 								alert('La fecha de nacimiento debe ser anterior a la fecha actual, por favor ingrese una fecha de nacimiento anterior a la fecha actual');
-								fechaNacimiento.focus();
 								return false;
 							}
 							else
@@ -226,7 +224,6 @@
 
                                 if(edad < 6 || edad > 120){
                                     alert('Por favor ingrese una fecha de nacimiento válida. La fecha de nacimiento debe corresponder a la de una persona de entre 6 a 120 años de edad ');
-                                    fechaNacimiento.focus();
                                     return false;
                                 }
                                 else
@@ -246,7 +243,6 @@
                 if(email.value == "")
                 {
                     alert('Por favor ingrese su dirección de E-Mail');
-                    email.focus();
                     return false;
                 }
 				else
@@ -256,7 +252,6 @@
                     if (!reMail.test(email.value)) 
                     {
                         alert('Debe ingresar una dirección de E-Mail válida');
-                        email.focus();
                         return false; 
                     }
 					else
@@ -282,7 +277,6 @@
 					
 					if(!reTelefonoLinea.test(nroTelefono.value) && !reTelefonoCelular.test(nroTelefono.value)){
 						alert('Por favor ingrese un número de teléfono válido. Por ejemplo 4904-2930 si ingresa un número de teléfono de linea, 15-6569-3010 si ingresa un teléfono celular, siendo los guiones opcionales en ambos casos');
-						nroTelefono.focus();
 						return false;
 					}
 					else
@@ -300,7 +294,6 @@
 				if(usuario.value == "")
 				{
 					alert('Debe ingresar su nombre de usuario');
-					usuario.focus();
 					return false;
 				}
 				else
@@ -309,14 +302,12 @@
 					var reUsuario = /^[a-zA-Z0-9]{8,}$/;
 					if(!reUsuario.test(usuario.value)) {
 						alert('Por favor ingrese un nombre de usuario válido. El nombre de usuario debe contener al menos 8 caracteres y debe estar conformado por letras y números');
-						usuario.focus();
 						return false;
 					}
 					else
 					{
                         if(!poseeLetrasyNumeros(usuario.value)){
                             alert('Por favor ingrese un nombre de usuario válido. El nombre de usuario debe estar conformado por letras y números')
-                            usuario.focus();
                             return false;
                         }
                         else
@@ -333,7 +324,6 @@
                 // Validar carga del password
                 if(password.value == ""){
                     alert('Debe ingresar su password');
-					password.focus();
 					return false;
                 }
                 else
@@ -342,7 +332,6 @@
 					var rePassword = /^[a-zA-Z0-9]{8,}$/;
 					if(!rePassword.test(password.value)) {
 						alert('Por favor ingrese un password válido. El password debe contener al menos 8 caracteres alfanuméricos');
-						password.focus();
 						return false;
 					}
                     else
@@ -360,10 +349,9 @@
                 var usuario = document.getElementById('txtUsuario');
                 var password = document.getElementById('txtPassword');
 
-                var rellenados = (nombre != "" && apellido != "" && fechaNacimiento != "" && email != "" && usuario != "" && password != "");
+                var rellenados = (nombre.value != "" && apellido.value != "" && fechaNacimiento.value != "" && email.value != "" && usuario.value != "" && password.value != "");
                 return rellenados;                
             }
-
 
             function validarDatosFormulario(){
                 var nombreValido = nombreEsValido();
@@ -378,96 +366,65 @@
                 return datosValidos;
             }
 
+            function enviarFormulario(){
+                var formularioEnviado = false;
+                if(validarDatosFormulario()){
+                    // Enviar datos
+                    formularioEnviado = true;
+                }
+                return formularioEnviado;
+            }
+
             $(function(){
 
-                function campoRellenado(){
-                    if(camposRellenados){
+                function campoRellenado()
+                {
+                    if(camposRellenados())
+                    {
                         $("#confirmacion").dialog({
                             resizable: false,
-                            height:240,
+                            height: 280,
                             modal: true,
-                            autoOpen: false,
                             buttons: {
-                                "Aceptar": function() {
+                                "Enviar": function() {
+                                    $("#frmDatos").submit();
+                                    $(this).dialog("close");
+                                },
+                                "Cancelar": function() {
                                     $(this).dialog("close");
                                 }
                             }
                         });
                     }
                 }
+				
+				$('#txtNombre').on('blur', function() {
+					if(nombreEsValido()){ campoRellenado(); } });
 
-                $("#txtNombre").blur(function() {
-                    if(nombreEsValido()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
+				$('#txtApellido').on('blur', function() {
+					if(apellidoEsValido()){ campoRellenado(); } });
 
-                $("#txtApellido").blur(function() {
-                    if(apellidoEsValido()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
+				$('#txtFechaNacimiento').on('blur', function() {
+					if(fechaNacimientoEsValida()){ campoRellenado(); } });
 
-                $("#txtFechaNacimiento").blur(function() {
-                    if(fechaNacimientoEsValida()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
+                $('#txtTelefono').on('blur', function() {
+					if(numeroTelefonoEsValido()){ campoRellenado(); } });
+					
+				$('#txtEmail').on('blur', function() {
+					if(emailEsValido()){ campoRellenado(); } });
 
-                $("#txtEmail").blur(function() {
-                    if(emailEsValido()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
+				$('#txtUsuario').on('blur', function() {
+					if(usuarioEsValido()){ campoRellenado(); } });
 
-                $("#txtUsuario").blur(function() {
-                    if(usuarioEsValido()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
-
-                $("#txtPassword").blur(function() {
-                    if(passwordEsValido()){
-                        campoRellenado();
-                    } else {
-                        var self = $(this);
-                            setTimeout(function(){
-                            self.focus();
-                        }, 1);  
-                    }
-                });
+				$('#txtPassword').on('blur', function() {
+					if(passwordEsValido()){ campoRellenado(); } });
 
             });
-
+			
         </script>
     </head>   
     <body>
-        <form action="RegistrarDatos" method="get" onsubmit="return validarDatosFormulario()">
+        <form id="frmDatos" action="RegistrarDatos" method="get" onsubmit="return enviarFormulario()">
             <h1>Formulario</h1>
             <section>
                 <h2>Datos personales</h2>
