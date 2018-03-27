@@ -1,0 +1,41 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Sortable - Drop placeholder</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <style>
+    #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+    html>body #sortable li { height: 1.5em; line-height: 1.2em; }
+    .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+    </style>
+    <script>
+    $(function() {
+        $( "#sortable" ).sortable({
+            placeholder: "ui-state-highlight"
+        });
+        $( "#sortable" ).disableSelection();
+    });
+    </script>
+</head>
+<body>
+<form action="ordenar.php" method="post"> 
+    <ul id="sortable">
+        <li class="ui-state-default"><input type="hidden" value="1" name="1" />Item 1</li>
+        <li class="ui-state-default"><input type="hidden" value="2" name="2" />Item 2</li>
+        <li class="ui-state-default"><input type="hidden" value="3" name="3" />Item 3</li>
+        <li class="ui-state-default"><input type="hidden" value="4" name="4" />Item 4</li>
+        <li class="ui-state-default"><input type="hidden" value="5" name="5" />Item 5</li>
+        <li class="ui-state-default"><input type="hidden" value="6" name="6" />Item 6</li>
+        <li class="ui-state-default"><input type="hidden" value="7" name="7" />Item 7</li>
+    </ul>
+    <input type="submit" value="Ordenar" name="ordenar" />
+</form> 
+ 
+</body>
+</html>
