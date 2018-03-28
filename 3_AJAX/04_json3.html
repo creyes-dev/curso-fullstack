@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div id="id01"></div>
+    <script>
+
+        // Funcion sera llamada en 04_json3.js 
+        // recibira datos en json por parámetros
+        function myFunction(arr) {
+            var out = "";
+            var i;
+            for (i = 0; i < arr.length; i++) {
+                out += '<a href="' + arr[i].url + '">' +
+                    arr[i].display + '</a><br>';
+            }
+            document.getElementById("id01").innerHTML = out;
+        }
+    </script>
+
+    <script src="04_json3.js"></script>
+
+</body>
+
+</html>
