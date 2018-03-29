@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("localhost", "root", "", "personas");
+$conn = new mysqli("localhost", "phpmyadmin", "myadmin123", "personas");
 
 $result = $conn->query("SELECT id_persona, nombre FROM `personas` WHERE 1");
 
