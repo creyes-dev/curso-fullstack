@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Evaluación Módulo 02 – Unidad 02</title>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.js"></script>
+    <link href="css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+
+    <style>
+        
+        .contenedor {
+            display: block;
+            padding: 16px;
+            border: 1px solid gray;
+            float: left;
+            width: 250px;
+            margin: 16px;
+        }
+               
+        .listado .ui-selecting {
+            background: #F39814;
+        }
+
+        .listado .ui-selected {
+            background: rgb(196,231,253);
+            color: rgb(80,141,178);
+        }
+
+        .listado {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .listado li {
+            margin: 3px;
+            padding: 0.4em;
+            font-size: 1.4em;
+            height: 18px;
+            border-radius: 6px;
+        }
+        
+        #controles{
+            text-align: center;
+            border: none;
+        }
+        
+    </style>
+    <script>
+        
+        function validarSeleccionUsuario(idAlumno){
+            
+            var cantAlumnosSeleccionados = false;
+            var cantAlumnosSeleccionados = 0;
+            
+            var alumnoSinSeleccionar = true;
+            
+            $('#alumnos-seleccionables .listado li').each(function(){
+                cantAlumnosSeleccionados += 1;
+                
+                if(this.id == idAlumno){
+                    alumnoSinSeleccionar = false;
+                }
+            });
+            
+            if(cantAlumnosSeleccionados < 3){
+                cantAlumnosSeleccionados = true;
+            } else {
+                alert('No está permitido seleccionar mas de 3 alumnos');
+            }
+            
+            return (alumnoSinSeleccionar && cantAlumnosSeleccionados);
+        }
+        
+        function AsociarEventos(){
+            $("#alumnos-seleccionables .listado li").draggable({
+                appendTo: "body",
+                helper: "clone"
+            });
+
+            $("#alumnos-seleccionados").droppable({
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-hover",
+                accept: ":not(.ui-sortable-helper)",
+                drop: function(event, ui) {
+                    var nombre = ui.draggable.text();
+                    var id = ui.draggable.attr("id");
+                    if(validarSeleccionUsuario(id)){
+                        var elemento = obtenerElementoListado(id, nombre);
+                        $(elemento).appendTo("#alumnos-seleccionados .listado");
+                    }
+                }
+            });
+        }
+        
+        function obtenerElementoListado(id, nombre) {
+            var elementoListado = $("<li id=" + id + " class='ui-widget-content'></li>").text(nombre);
+            return elementoListado;
+        }
+
+        function cargarAlumnosSeleccionables(){
+            var xmlhttp = new XMLHttpRequest();
+            var url = "cristianReyes.php";
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    mostrarAlumnos(xmlhttp.responseText);
+                }
+            }
+
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
+
+        function mostrarAlumnos(response){
+            var alumnos = JSON.parse(response);
+            var id;
+            var nombre;
+            var elemento;
+            
+            var i;
+
+            for (i = 0; i < alumnos.length; i++) {
+                id = alumnos[i].Id;
+                nombre = alumnos[i].Nombre;
+                
+                var elemento = obtenerElementoListado(id, nombre);
+                $(elemento).appendTo("#alumnos-seleccionables .listado");
+            }
+            
+            AsociarEventos();
+        }
+        
+        cargarAlumnosSeleccionables();
+        
+    </script>
+</head>
+
+<body>
+
+    <div id="contenido">
+        <div id="alumnos-seleccionables" class="contenedor">
+            <p>Lista de Alumnos</p>
+            <ol class="listado">
+            </ol>
+        </div>
+        <div id="controles" class="contenedor">
+            <input type="button" id="btnSeleccionar" value="Seleccionar" />
+        </div>
+        <div id="alumnos-seleccionados" class="contenedor">
+            <p>Alumnos seleccionados</p>
+            <ol class="listado">
+            </ol>
+        </div>
+    </div> 
+    
+</body>
+
+</html>
