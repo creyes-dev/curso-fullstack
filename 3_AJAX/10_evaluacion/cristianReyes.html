@@ -42,17 +42,12 @@
             border-radius: 6px;
         }
         
-        #controles{
-            text-align: center;
-            border: none;
-        }
-        
     </style>
     <script>
         
         function validarSeleccionUsuario(idAlumno){
             
-            var cantAlumnosSeleccionados = false;
+            var alumnosSeleccionados = false;
             var cantAlumnosSeleccionados = 0;
             
             var alumnoSinSeleccionar = true;
@@ -66,12 +61,12 @@
             });
             
             if(cantAlumnosSeleccionados < 3){
-                cantAlumnosSeleccionados = true;
+                alumnosSeleccionados = true;
             } else {
                 alert('No está permitido seleccionar mas de 3 alumnos');
             }
             
-            return (alumnoSinSeleccionar && cantAlumnosSeleccionados);
+            return (alumnoSinSeleccionar && alumnosSeleccionados);
         }
         
         function AsociarEventos(){
@@ -88,8 +83,11 @@
                     var nombre = ui.draggable.text();
                     var id = ui.draggable.attr("id");
                     if(validarSeleccionUsuario(id)){
+                        // Agregar el elemento a la lista de alumnos seleccionados
                         var elemento = obtenerElementoListado(id, nombre);
                         $(elemento).appendTo("#alumnos-seleccionados .listado");
+                        // Remover el alumno seleccionado de la lista de alumnos seleccionables
+                        $("#alumnos-seleccionables .listado #" + id).remove();
                     }
                 }
             });
@@ -145,9 +143,6 @@
             <p>Lista de Alumnos</p>
             <ol class="listado">
             </ol>
-        </div>
-        <div id="controles" class="contenedor">
-            <input type="button" id="btnSeleccionar" value="Seleccionar" />
         </div>
         <div id="alumnos-seleccionados" class="contenedor">
             <p>Alumnos seleccionados</p>
