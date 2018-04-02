@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Ajax</title>
+    <script src="ajax_lib.js" language="JavaScript"></script>
+    <script src="funciones.js" language="JavaScript"></script>
+</head>
+
+<body>
+    <h1>Prueba de cargar un control de tipo select recuperando datos del servidor mediante AJAX</h1>
+    Seleccione la carrera:
+    <select id="carreras" name="carreras" onchange="mostrarMaterias();">
+        <option value="0">Seleccionar....</option>
+        <option value="1">Analista de sistemas</option>
+        <option value="2">Telecomunicaciones</option>
+        <option value="3">WebMaster</option>
+    </select>
+    <span id="espera"></span>
+    <br> Materias de la carrera:
+    <select id="materias" name="materias">
+    </select>
+    <br>
+</body>
+
+</html>

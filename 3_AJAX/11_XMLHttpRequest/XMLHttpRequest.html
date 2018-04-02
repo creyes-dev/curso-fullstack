@@ -1,0 +1,53 @@
+<html>
+
+<head>
+
+    <script src="ajax_lib.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var canal;
+        function traer_contenido() {
+
+            canal = create_ajax();
+
+            /*
+            onreadystatechange 	Almacena una funcion que va a ser llamada automaticamente cada vez que el readyState cambia  
+            readyState 			Almacena el estado del XMLHttpRequest. Cambia de 0 a 4: 
+                0: request not initialized 
+                1: server connection established
+                2: request received 
+                3: processing request 
+                4: request finished and response is ready 
+            status 	200: "OK"
+                    404: Page not found 
+            
+            */
+
+            canal.onreadystatechange = handler_contenido;
+            canal.open("GET", "servidor1.htm");
+            canal.send();
+        }
+
+        function handler_contenido() {
+            if (canal.readyState == 4) {
+                if (canal.status != 200) { alert('Error de conexión al servidor'); return; }
+
+                document.getElementById('box').innerHTML = canal.responseText;
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <input type="button" value="Presione para traer contenido por AJAX" onClick="traer_contenido()" />
+
+    <hr />
+
+    <div id="box">
+        [aquí vendrá el contenido]
+    </div>
+
+</body>

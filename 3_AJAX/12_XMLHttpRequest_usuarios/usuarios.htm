@@ -1,0 +1,90 @@
+<html>
+
+<head>
+
+	<script src="ajax_lib.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+
+		var canal;
+		function chequear_usuario() {
+
+			if (document.getElementById('nombre_usuario').value == "") return;
+
+			canal = create_ajax();
+			/*
+			onreadystatechange 	Almacena una funcion que va a ser llamada automaticamente cada vez que el readyState cambia  
+			readyState 			Almacena el estado del XMLHttpRequest. Cambia de 0 a 4: 
+				0: request not initialized 
+				1: server connection established
+				2: request received 
+				3: processing request 
+				4: request finished and response is ready 
+			status 	200: "OK"
+					404: Page not found 
+			
+			*/
+
+			canal.onreadystatechange = handler_usuario;
+			canal.open("POST", "chequear_usuario.php");
+			var parametros = "usuario=" + encodeURIComponent(document.getElementById('nombre_usuario').value);
+
+			canal.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			canal.send(parametros);
+			document.getElementById('img_loader').style.display = "inline"; //alumno
+		}
+
+		function handler_usuario() {
+			if (canal.readyState == 4) {
+				if (canal.status != 200) { alert('Error de conexi�n al servidor'); return; }
+
+				if (canal.responseText == 'disp') { //disponible?
+					document.getElementById('chequeo_usuario').innerHTML = "Usuario disponible";
+					document.getElementById('img_loader').style.display = "none"; //alumno
+
+				}
+				else {
+					document.getElementById('chequeo_usuario').innerHTML = "Usuario NO disponible";
+					document.getElementById('img_loader').style.display = "none"; //alumno
+
+				}
+
+			}
+		}
+
+	</script>
+
+	<style type="text/css">
+		body {
+			font-family: Verdana;
+		}
+
+		span {
+			font-size: 0.6em;
+			font-weight: bold;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<h1>Registro de usuario</h1>
+
+	<form method="post" action="registrar.php">
+
+		Nombre de usuario:
+		<input type="text" name="nombre_usuario" id="nombre_usuario" onBlur="chequear_usuario()" />
+		<span id="chequeo_usuario"></span>
+		<img src="loader.gif" style="display:none" id="img_loader" />
+		<!-- alumno -->
+		<br />
+		<br /> Contraseña:
+		<input type="text" id="clave" name="clave" />
+		<br />
+		<br />
+		<input type="submit" />
+
+	</form>
+
+</body>
