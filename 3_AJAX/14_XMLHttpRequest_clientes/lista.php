@@ -1,4 +1,4 @@
-<?php
+ <?php
 require('conexion.php');
 
 //seleccionamos solo el nombre de los clientes
