@@ -2,22 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Evaluación </title>
+<title>Evaluación Módulo 02 – Unidad 03</title>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jquery-ui-1.8.12.custom.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        
-        $.getJSON('cargarCarreras.php', function(data){
+		
+		function actualizarMaterias(){
+			var carreraSeleccionada = $("select.carrera").val();
+			var urlRecurso = 'cargarMaterias.php?carrera=' + carreraSeleccionada;
+		
+			$.getJSON(urlRecurso, function(datos){
+				var html = '';
+				var longitud = datos.length;
+				for (var i = 0; i<longitud; i++){
+					html += '<option value="' + datos[i].id + '">' + datos[i].nombre + '</option>';
+				}
+				$('select.materia').html(html);
+			});
+		}
+		
+		$("select.carrera").change(function () {
+			actualizarMaterias();
+		});
+		
+        $.getJSON('cargarCarreras.php', function(datos){
             var html = '';
-            var len = data.length;
-            for (var i = 0; i< len; i++) {
-                html += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+            var longitud = datos.length;
+            for (var i = 0; i<longitud; i++) {
+                html += '<option value="' + datos[i].id + '">' + datos[i].nombre + '</option>';
             }
             $('select.carrera').append(html);
+			actualizarMaterias();
         });
-        
     });
 </script>
 </head>

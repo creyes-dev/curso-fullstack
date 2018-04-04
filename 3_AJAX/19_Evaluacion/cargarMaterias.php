@@ -21,6 +21,6 @@
     }
 
 	// convertimos el array de datos a formato json
-	echo json_encode($resultados);
+	echo json_encode($resultados, JSON_UNESCAPED_UNICODE);
 
 ?>
