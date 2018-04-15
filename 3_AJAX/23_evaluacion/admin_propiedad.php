@@ -15,12 +15,37 @@
 <script type="text/javascript" src="scripts/jquery-ui-1.9.2.custom.js"></script>
 
 <script>
+
+	function guardar(){
+		
+		var calleAltura = $(".title").val();
+		var entreCalles = $(".entreCalles").val();
+		var localidad = $(".localidad").val();
+		var descripcion = $(".ambientes").val();
+		var descripcionCorta = $(".descripcion").val();
+		var valor = $(".valor").val();
+
+		$.post("includes/crear_propiedad.php", {
+				barrio: localidad,
+				calle_altura: calleAltura,
+				descripcion: descripcion,
+				descripcionCorta: descripcionCorta,
+				entreCalles: entreCalles,
+				valor: valor
+		});
+	}
+
 	$(function() {
 		
 		$( "#dataSheet ul" ).sortable({
 			placeholder: "space",
 			handle: "a.sort",
 			axis: "y"
+		});
+
+		$("#btnCargarImagen").click(
+			function(){
+				guardar();
 		});
 
 	});
@@ -39,7 +64,7 @@
 	  include ('includes/admin_header.php');
 	?>
 	<div id="page" class="admin">
-	<form action="admin_imagenes.php" method="post" onsubmit="return validar();">
+
 		<div class="pageWidth clearAfter">
 		
 			<ul id="subNav" class="clearAfter">
@@ -47,7 +72,6 @@
 				<li><a href="#">Venta</a></li>
 			</ul>
 			
-					
 			<div id="ubicacion" class="clearAfter">
 				<div class="titulo">
 					<input type="text" class="title" placeholder="Calle y altura"/>
@@ -89,9 +113,8 @@
 					<textarea placeholder="Descripción detallada"></textarea>
 				</div>
 
-				<input type="submit" id="mainAction" value="Cargar imagenes"/>
-				
-				<input type="submit" id="mainAction" value="Cancelar"/>
+				<input type="submit" id="btnCargarImagen" value="Cargar imagenes" onclick="guardar();" />
+				<input type="submit" id="btnCancelar" value="Cancelar"/>
 			</div>
 		
 			<div id="secondaryContent" >
@@ -158,7 +181,6 @@
 
 	    	</div>
 		</div>
-		</form>
 	</div>
 	<!--Pie-->
 	<?php  

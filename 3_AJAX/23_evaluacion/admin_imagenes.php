@@ -14,29 +14,83 @@
 <script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.9.2.custom.js"></script>
 
-
 <script>
-	$(function() {
+
+	function CargarDatosPropiedad(){
+		var propiedad = $("#IdPropiedad").value;
+		var urlRecurso = "includes/obtener_propiedades.php?prop=" + propiedad;
+		$.getJSON(urlRecurso, function(resultados){
+			$(".title").value = resultados[0].calleAltura;
+			$(".entreCalles").value = resultados[0].entreCalles;
+			$(".localidad").value = resultados[0].barrio;
+		});
+	}
+
+	function CargarImagenes(){
+		var propiedad = $("#IdPropiedad").value;
+		var urlRecurso = "includes/obtener_fotos_propiedad.php?prop=" + propiedad;
+
+		$("#photoList ul").empty();
+		var html = '';
+
+		$.getJSON(urlRecurso, function(resultados){
+			$.each(resultados, function(i, propiedad){
+				html = '<li class="clearAfter">';
+				html += '<span id="' + propiedad.id + '" class="photo" style="background: url("' + propiedad.ruta + '")"></span>';
+				html += '<a href="#" class="delete">Eliminar</a>';
+				html += '<a href="#" class="sort">Ordenar</a>';
+				html += '</li>';
+
+				$('#photoList ul').append(html);
+			});
+		});
+	}
+	
+	$( document ).ready(function() {
+		CargarDatosPropiedad();
+		CargarImagenes();
 		$( "#photoList ul" ).sortable({
 			placeholder: "space",
 			handle: "a.sort",
 			axis: "y"
 		});
 
+	$("#frmImagen").submit(function(e) {
+		var formObj = $(this);
+		var formURL = formObj.attr("action");
+		var formData = new FormData(this);
+		$.ajax({
+			url: formURL,
+			type: 'POST',
+			data:  formData,
+			mimeType:"multipart/form-data",
+			contentType: false,
+			cache: false,
+			processData:false,
+			success: function(data)
+			{
+				CargarImagenes();
+			}         
+		});
+		e.preventDefault(); //Prevent Default action.
+		});
 	});
+	
 </script>
 
 </head>
 <body id="propiedad">
+
 	<?php
 		session_start();
 		$_SESSION['seccion']= "propiedades";
 	?>
-	  
+
 	 <!--Encabezado-->
 	<?php  
 	  include ('includes/admin_header.php');
 	?>
+
 	<div id="page" class="admin">
 		<div class="pageWidth clearAfter">
 		
@@ -45,7 +99,6 @@
 				<li><a href="#">Venta</a></li>
 			</ul>
 			
-					
 			<div id="ubicacion" class="clearAfter">
 				<div class="titulo">
 					<input type="text" class="title" placeholder="Calle y altura"/>
@@ -75,13 +128,20 @@
 						</li>
 					</ul>
 					<h2>Agregar imagen</h2>
-					<input type="file">
 
-					<input type="submit" id="addImage" value="Cargar"/>
-				</div>
-
-				<input type="submit" id="mainAction" value="Guardar"/>
-				
+					<form id="frmImagen" action="includes/subearchivo.php" method="post" enctype="multipart/form-data">
+						<input id="IdPropiedad" name="IdPropiedad" type="hidden" value="
+						<?php 
+							if(isset($_REQUEST['prop'])){
+								echo($_REQUEST['prop']);
+							}
+						?>
+						">
+						<input name="userfile" type="file">
+						<br>
+						<input type="submit" id="addImage" value="Cargar"/>
+					</form> 
+				</div>				
 			</div>
 		
 			<div id="secondaryContent" >
@@ -98,4 +158,6 @@
 
         
 </body>
+
+
 </html>
