@@ -1,6 +1,6 @@
 <?php
 
-include('conexion.php');   
+include('configuracion.php');   
 
 if(isset($_POST['barrio']) && isset($_POST['calle_altura']) && isset($_POST['descripcion']) && 
    isset($_POST['descripcionCorta']) && isset($_POST['entreCalles']) && 
@@ -22,7 +22,8 @@ if(isset($_POST['barrio']) && isset($_POST['calle_altura']) && isset($_POST['des
     }
     
     // Redireccionar a la página de imágenes de la propiedad
-    header('Location: /admin_imagenes.php?prop=' . $resultado);
+    $ruta = getDirectorioRaiz() .  'admin_imagenes.php?prop=' . $resultado;    
+    header('Location: ' . $ruta);
 }
 
 ?>

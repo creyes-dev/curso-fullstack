@@ -1,6 +1,6 @@
 <?php
 
-include('conexion.php');
+include('configuracion.php');
 
 $selectSql = "SELECT MAX(orden) AS Orden FROM `imagenes` WHERE id_propiedad = 1";
 
