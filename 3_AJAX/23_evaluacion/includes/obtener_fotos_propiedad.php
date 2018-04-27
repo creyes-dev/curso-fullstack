@@ -1,12 +1,19 @@
 <?php
     
-    include('conexion.php'); 
+    include('configuracion.php'); 
 
     if(isset($_REQUEST['prop'])){
 
         $selectSql = "SELECT id_imagen, ruta_imagen, orden";
         $selectSql.= " FROM imagenes";
-        $selectSql.= " WHERE id_propiedad = " . $_REQUEST['prop'];
+        
+        if($_REQUEST['prop'] != "0"){
+            $selectSql.= " WHERE id_propiedad = " . $_REQUEST['prop'];
+        } else {
+            $selectSql.= " WHERE id_propiedad IS NULL ";
+        }
+        
+        $selectSql.= " ORDER BY orden";
         
         if($conexion = getConexionMysqli()){
             $comando = mysqli_query($conexion, $selectSql);

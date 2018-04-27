@@ -1,14 +1,16 @@
 
 <?php
 
-    include('conexion.php'); 
+    include('configuracion.php'); 
 
     $selectSql = "SELECT id, barrio, calle_altura, descripcion, "; 
     $selectSql.= "       descripcion_corta, valor, entre_calles";
     $selectSql.= " FROM propiedad";
 
     if(isset($_REQUEST['prop'])){
-        $selectSql.= " WHERE id = " . $_REQUEST['prop'];
+        if($_REQUEST['prop'] != "0"){
+           $selectSql.= " WHERE id = " . $_REQUEST['prop']; 
+        }
     }
 
     if($conexion = getConexionMysqli()){
@@ -18,7 +20,7 @@
         {
             $resultados[] = array(
                 'id'    => $row['id'],
-                'ruta'  => $row['barrio'],
+                'barrio'  => $row['barrio'],
                 'calleAltura' => $row['calle_altura'],
                 'descripcion' => $row['descripcion'],
                 'descripcionCorta' => $row['descripcion_corta'],

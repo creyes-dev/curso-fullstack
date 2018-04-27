@@ -7,7 +7,7 @@
 <title>Admin Propiedades</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'> -->
 <link href="styles/general.css" rel="stylesheet" type="text/css" />
 <link href="styles/fonts.css" rel="stylesheet" type="text/css" />
 
@@ -16,8 +16,7 @@
 
 <script>
 
-	function CargarDatosPropiedad(){
-		var propiedad = $("#IdPropiedad").value;
+	function CargarDatosPropiedad(propiedad){
 		var urlRecurso = "includes/obtener_propiedades.php?prop=" + propiedad;
 		$.getJSON(urlRecurso, function(resultados){
 			$(".title").value = resultados[0].calleAltura;
@@ -26,8 +25,7 @@
 		});
 	}
 
-	function CargarImagenes(){
-		var propiedad = $("#IdPropiedad").value;
+	function CargarImagenes(propiedad){
 		var urlRecurso = "includes/obtener_fotos_propiedad.php?prop=" + propiedad;
 
 		$("#photoList ul").empty();
@@ -36,7 +34,7 @@
 		$.getJSON(urlRecurso, function(resultados){
 			$.each(resultados, function(i, propiedad){
 				html = '<li class="clearAfter">';
-				html += '<span id="' + propiedad.id + '" class="photo" style="background: url("' + propiedad.ruta + '")"></span>';
+				html += '<span id="' + propiedad.id + '" class="photo" style="background: url(' + propiedad.ruta + ')"></span>';
 				html += '<a href="#" class="delete">Eliminar</a>';
 				html += '<a href="#" class="sort">Ordenar</a>';
 				html += '</li>';
@@ -45,14 +43,26 @@
 			});
 		});
 	}
+        
+        function ReordenarImagenes() {
+            $("#photoList ul li").each(function(i, imagen){
+                var idImagen = $(imagen).find(".photo")[0].id;
+                
+                var recurso = "includes/reordenar_imagen.php?imagen=" + idImagen + "&orden=" + i;                
+                $.ajax({
+			url: recurso      
+		});
+            });
+        }
 	
 	$( document ).ready(function() {
-		CargarDatosPropiedad();
-		CargarImagenes();
 		$( "#photoList ul" ).sortable({
 			placeholder: "space",
 			handle: "a.sort",
-			axis: "y"
+			axis: "y",
+                        stop: function(){
+                            ReordenarImagenes();
+                        }
 		});
 
 	$("#frmImagen").submit(function(e) {
@@ -69,7 +79,8 @@
 			processData:false,
 			success: function(data)
 			{
-				CargarImagenes();
+                            var propiedad = $("#IdPropiedad").val();
+			    CargarImagenes(propiedad);
 			}         
 		});
 		e.preventDefault(); //Prevent Default action.
@@ -84,6 +95,16 @@
 	<?php
 		session_start();
 		$_SESSION['seccion']= "propiedades";
+                
+                $propiedad = "0";                
+		if(isset($_REQUEST['prop'])){
+                    $propiedad = $_REQUEST['prop'];
+		}
+                
+                echo '<script type="text/javascript">',
+                     ' CargarDatosPropiedad(' . $propiedad . ');',
+                     ' CargarImagenes(' . $propiedad . ');',
+                     '</script>';
 	?>
 
 	 <!--Encabezado-->
@@ -110,33 +131,17 @@
 			<div id="primaryContent">
 
 				<div id="photoList">
-					<ul>
-						<li class="clearAfter">
-							<span class="photo" style="background: url(photos/thumb_01.jpg)"></span>
-							<a href="#" class="delete">Eliminar</a>
-							<a href="#" class="sort">Ordenar</a>
-						</li>
-						<li class="clearAfter">
-							<span class="photo" style="background: url(photos/thumb_02.jpg)"></span>
-							<a href="#" class="delete">Eliminar</a>
-							<a href="#" class="sort">Ordenar</a>
-						</li>
-						<li class="clearAfter">
-							<span class="photo" style="background: url(photos/thumb_03.jpg)"></span>
-							<a href="#" class="delete">Eliminar</a>
-							<a href="#" class="sort">Ordenar</a>
-						</li>
-					</ul>
+					<ul></ul>
 					<h2>Agregar imagen</h2>
 
 					<form id="frmImagen" action="includes/subearchivo.php" method="post" enctype="multipart/form-data">
-						<input id="IdPropiedad" name="IdPropiedad" type="hidden" value="
-						<?php 
-							if(isset($_REQUEST['prop'])){
-								echo($_REQUEST['prop']);
-							}
-						?>
-						">
+                                            <?php
+                                                $propiedad = "0";
+                                                if(isset($_REQUEST['prop'])){
+                                                    $propiedad = $_REQUEST['prop'];
+                                                }
+                                                echo '<input id="IdPropiedad" name="IdPropiedad" type="hidden" value="' . $propiedad .'">';
+                                            ?>
 						<input name="userfile" type="file">
 						<br>
 						<input type="submit" id="addImage" value="Cargar"/>

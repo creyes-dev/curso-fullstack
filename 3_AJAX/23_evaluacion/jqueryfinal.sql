@@ -1,75 +1,73 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.12deb2+deb8u2
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 14, 2018 at 08:42 AM
--- Server version: 5.5.52-0+deb8u1
--- PHP Version: 5.6.33-0+deb8u1
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 18-04-2018 a las 01:33:54
+-- Versión del servidor: 5.7.19
+-- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jqueryfinal`
+-- Base de datos: `jqueryfinal`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `imagenes`
+-- Estructura de tabla para la tabla `imagenes`
 --
 
+DROP TABLE IF EXISTS `imagenes`;
 CREATE TABLE IF NOT EXISTS `imagenes` (
-`id_imagen` int(11) NOT NULL,
-  `id_propiedad` int(11) NOT NULL,
+  `id_imagen` int(11) NOT NULL AUTO_INCREMENT,
+  `id_propiedad` int(11) DEFAULT NULL,
   `ruta_imagen` varchar(100) NOT NULL,
-  `orden` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  `orden` int(11) NOT NULL,
+  PRIMARY KEY (`id_imagen`),
+  KEY `id_propiedad` (`id_propiedad`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `imagenes`
+-- Volcado de datos para la tabla `imagenes`
 --
 
 INSERT INTO `imagenes` (`id_imagen`, `id_propiedad`, `ruta_imagen`, `orden`) VALUES
-(2, 1, 'admin/imagenes/gal00502.jpg', 2),
-(3, 1, 'admin/imagenes/gal00503.jpg', 1),
-(4, 1, 'admin/imagenes/gal00507.jpg', 4),
-(5, 1, 'admin/imagenes/gal00506.jpg', 3),
-(6, 1, 'admin/imagenes/gal00508.jpg', 5),
-(7, 2, 'admin/imagenes/blancoencalada4709.jpg', 1),
-(8, 4, 'admin/imagenes/prop0002.jpg', 1),
-(9, 5, 'admin/imagenes/altolaguirre2195.jpg', 1),
-(11, 3, 'admin/imagenes/Frente.jpeg', 1),
-(14, 6, 'admin/imagenes/novedades4.jpg', 1),
-(15, 6, 'admin/imagenes/hand shake.jpg', 2),
-(16, 6, 'admin/imagenes/novedades1.jpg', 3),
-(17, 7, 'admin/imagenes/teclado.jpg', 1);
+(26, NULL, 'includes/photos/01d0cc9d8d353c6f19148b27506d7193.jpg', 1),
+(27, NULL, 'includes/photos/I3X8LI340553-02.jpg', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `propiedad`
+-- Estructura de tabla para la tabla `propiedad`
 --
 
+DROP TABLE IF EXISTS `propiedad`;
 CREATE TABLE IF NOT EXISTS `propiedad` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `calle_altura` varchar(200) NOT NULL,
   `barrio` varchar(200) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `descripcion_corta` varchar(200) NOT NULL,
   `valor` double NOT NULL,
-  `entre_calles` varchar(200) NOT NULL
+  `entre_calles` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `id_2` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `propiedad`
+-- Volcado de datos para la tabla `propiedad`
 --
 
 INSERT INTO `propiedad` (`id`, `calle_altura`, `barrio`, `descripcion`, `descripcion_corta`, `valor`, `entre_calles`) VALUES
@@ -80,50 +78,22 @@ INSERT INTO `propiedad` (`id`, `calle_altura`, `barrio`, `descripcion`, `descrip
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prueba`
+-- Estructura de tabla para la tabla `prueba`
 --
 
+DROP TABLE IF EXISTS `prueba`;
 CREATE TABLE IF NOT EXISTS `prueba` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `prueba`
+-- Volcado de datos para la tabla `prueba`
 --
 
 INSERT INTO `prueba` (`id`) VALUES
 (3);
+COMMIT;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `imagenes`
---
-ALTER TABLE `imagenes`
- ADD PRIMARY KEY (`id_imagen`), ADD KEY `id_propiedad` (`id_propiedad`);
-
---
--- Indexes for table `propiedad`
---
-ALTER TABLE `propiedad`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`), ADD KEY `id_2` (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `imagenes`
---
-ALTER TABLE `imagenes`
-MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT for table `propiedad`
---
-ALTER TABLE `propiedad`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
