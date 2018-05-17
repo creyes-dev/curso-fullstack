@@ -9,12 +9,6 @@
 
     <title>Métodos compartidos</title>
 
-    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-     IE10 viewport hack for Surface/desktop Windows 8 bug 
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
-
     <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -22,9 +16,10 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#">Métodos compartidos</a>
+        <a class="navbar-brand" href="index.html">
+            <img src="img/Metodos_160_160.png" alt="metodos" class="logo"/>
+            Métodos compartidos</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,35 +27,44 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="index.html">Principal
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pagina1.html">Página 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pagina2.html">Página 2</a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <div class="mt-3">
+        <div id="contenedor-titulo" class="mt-3">
+            <img src="img/Metodos_160_160.png" alt="metodos" class="imagen" />
             <h1 class="titulo">Bienvenido a Métodos Compartidos</h1>
         </div>
-        <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed
-            navbar has been added with
-            <code>padding-top: 60px;</code> on the
-            <code>body &gt; .container</code>.</p>
-        <p>Back to
-            <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+        <div id="contenedor-titulo" class="mt-3">
+            <p>Página de contacto responsive sin barra al pié que contiene una barra 
+                de navegación fija en la cabecera que fue agregada con las propiedades 
+                <code>padding-top: 60px;</code> en el 
+                <code>body &gt; .container</code>.
+            </p>
+            <p>Las secciones de la página están conformadas por: 
+                <a href="contacto.html">Un formulario de contacto</a> y las páginas: 
+                <a href="pagina1.html">Página 1</a> y 
+                <a href="pagina2.html">Página 2</a>. 
+            </p>
+            <p> Además puede descargar el 
+                <a href="img/Metodos_1096_1088.png">Logo de la página</a>
+            </p>
         </div>
-    </footer>
-
+    </div>
 </body>
 
 </html>

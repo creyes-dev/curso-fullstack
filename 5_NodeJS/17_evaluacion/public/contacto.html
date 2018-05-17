@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="evaluación-unidad2">
+    <meta name="author" content="creyes-dev">
+
+    <title>Métodos compartidos - Formulario de contacto</title>
+
+    <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="index.html">
+            <img src="img/Metodos_160_160.png" alt="metodos" class="logo" /> Métodos compartidos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Principal
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="contacto.html">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pagina1.html">Página 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pagina2.html">Página 2</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Formulario de contacto</h1>
+
+        <form action="recuperardatos" method="post">
+            <div class="form-group">
+              <label for="email">Dirección de e-mail:</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje:</label>
+              <textarea class="form-control" rows="2" id="mensaje"></textarea>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form> 
+    </div>
+</body>
+
+</html>
