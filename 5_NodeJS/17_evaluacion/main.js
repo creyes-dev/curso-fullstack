@@ -25,6 +25,28 @@ var servidor = http.createServer(function(pedido, respuesta) {
   encaminar(pedido, respuesta, camino);
 });
 
+function enviar_mail(emailDestino, mensaje){
+
+  var mailEnviado = false;
+  var errorCapturado = null;
+
+  var mailOptions = {
+    from: "reyescristiane@gmail.com",
+    to: emailDestino,
+    subject: "Email enviado usando Node.Js[nodemailer]",
+    text: mensaje
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      errorCapturado = error;
+    } else {
+      mailenviado = true;
+    }
+    callback(mailenviado, errorCapturado);
+  });
+}
+
 function encaminar(pedido, respuesta, camino) {
 
   switch (camino) {
@@ -78,17 +100,25 @@ function recuperar(pedido, respuesta) {
         var emailDestino = formulario['email'];
         var mensaje = formulario['mensaje'];
 
-        respuesta.writeHead(200, { "Content-Type": "text/html" });
-        var pagina =
-          "<!doctype html><html><head></head><body>" +
-          "Email origen: " +
-          emailDestino +
-          "<br>" +
-          "Mensaje: " +
-          mensaje +
-          "<br>" +
-          '<a href="index.html">Retornar</a>' +
-          "</body></html>";
-        respuesta.end(pagina);
+        enviar_mail(emailDestino, mensaje, function(enviado, error){
+          if(enviado){
+            respuesta.writeHead(200, { "Content-Type": "text/html" });
+            var pagina =
+              "<!doctype html><html><head></head><body>" +
+              "Email origen: " +
+              emailDestino +
+              "<br>" +
+              "Mensaje: " +
+              mensaje +
+              "<br>" +
+              '<a href="index.html">Retornar</a>' +
+              "</body></html>";
+            respuesta.end(pagina);
+          }
+          else{
+            console.log(error);
+          }
+        });
+
       });
 }
