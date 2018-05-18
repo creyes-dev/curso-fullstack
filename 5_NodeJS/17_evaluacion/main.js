@@ -1,7 +1,7 @@
 var http = require("http");
-var url=require('url');
-var fs=require('fs');
-var querystring = require('querystring');
+var url = require("url");
+var fs = require("fs");
+var querystring = require("querystring");
 var mime = require("mime");
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
@@ -17,18 +17,6 @@ var mime = {
     'png'  : 'image/png'
  };
 
-// Configurar nodemailer y el servidor smtp
-var transporter = nodemailer.createTransport(
-  smtpTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
-    auth: {
-      user: "reyescristiane@gmail.com",
-      pass: "NadineWolf"
-    }
-  })
-);
-
 // Configurar el servidor web e iniciarlo
 var servidor = http.createServer(function(pedido, respuesta) {
   var objetourl = url.parse(pedido.url);
@@ -38,7 +26,6 @@ var servidor = http.createServer(function(pedido, respuesta) {
 });
 
 function encaminar(pedido, respuesta, camino) {
-  console.log(camino);
 
   switch (camino) {
     case "public/recuperardatos": {
@@ -54,13 +41,6 @@ function encaminar(pedido, respuesta, camino) {
               respuesta.write("Error interno");
               respuesta.end();
             } else {
-
-                /*
-                var tipo=mime.lookup(camino);
-                console.log(tipo);
-                respuesta.writeHead(200, {'Content-Type': tipo});
-               */
-
               var vec = camino.split(".");
               var extension = vec[vec.length - 1];
               var mimearchivo = mime[extension];
@@ -89,41 +69,26 @@ console.log('Servidor web iniciado');
 function recuperar(pedido, respuesta) {
 
     var info = '';    
-    pedido.on("data", function(datosparciales) {
+    pedido.on('data', function(datosparciales) {
         info += datosparciales;
       });
 
-    var formulario = querystring.parse(info);
-    var emailDestino = formulario["email"];
-    var mensaje = formulario["mensaje"];
-
-    var mailOptions = {
-        from: "reyescristiane@gmail.com",
-        to: emailDestino,
-        subject: "Email enviado usando Node.Js[nodemailer]",
-        text: mensaje
-      };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-
-      pedido.on("end", function() {
+      pedido.on('end', function() {
         var formulario = querystring.parse(info);
+        var emailDestino = formulario['email'];
+        var mensaje = formulario['mensaje'];
+
         respuesta.writeHead(200, { "Content-Type": "text/html" });
         var pagina =
           "<!doctype html><html><head></head><body>" +
-          "Email origen:" +
+          "Email origen: " +
           emailDestino +
           "<br>" +
-          "Mensaje:" +
+          "Mensaje: " +
           mensaje +
           "<br>" +
           '<a href="index.html">Retornar</a>' +
           "</body></html>";
         respuesta.end(pagina);
       });
-    }
-  });
 }
