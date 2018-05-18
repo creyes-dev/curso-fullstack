@@ -25,13 +25,23 @@ var servidor = http.createServer(function(pedido, respuesta) {
   encaminar(pedido, respuesta, camino);
 });
 
-function enviar_mail(emailDestino, mensaje){
-
+function enviar_mail(emailDestino, mensaje, callback){
   var mailEnviado = false;
   var errorCapturado = null;
 
+  var transporter = nodemailer.createTransport(
+    smtpTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      auth: {
+        user: "xxxxxx@gmail.com",
+        pass: "xxxxxx"
+      }
+    })
+  );
+
   var mailOptions = {
-    from: "reyescristiane@gmail.com",
+    from: "xxxxxxxx@gmail.com",
     to: emailDestino,
     subject: "Email enviado usando Node.Js[nodemailer]",
     text: mensaje
@@ -41,9 +51,9 @@ function enviar_mail(emailDestino, mensaje){
     if (error) {
       errorCapturado = error;
     } else {
-      mailenviado = true;
+      mailEnviado = true;
     }
-    callback(mailenviado, errorCapturado);
+    callback(mailEnviado, errorCapturado);
   });
 }
 
@@ -104,7 +114,7 @@ function recuperar(pedido, respuesta) {
           if(enviado){
             respuesta.writeHead(200, { "Content-Type": "text/html" });
             var pagina =
-              "<!doctype html><html><head></head><body>" +
+              "<!doctype html><html><head></head><body> <h1>Email enviado</h1> " +
               "Email origen: " +
               emailDestino +
               "<br>" +
@@ -114,11 +124,9 @@ function recuperar(pedido, respuesta) {
               '<a href="index.html">Retornar</a>' +
               "</body></html>";
             respuesta.end(pagina);
-          }
-          else{
+          } else {
             console.log(error);
           }
         });
-
       });
 }
