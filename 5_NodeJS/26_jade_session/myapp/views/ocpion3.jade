@@ -1,0 +1,10 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+				p Bienvenido #{user}
+				h2 Contenido opcion 3
+				a(href="/admin") Volver |
+				a(href="/admin/logout")  Logout
+
+			include layouts/footer.jade

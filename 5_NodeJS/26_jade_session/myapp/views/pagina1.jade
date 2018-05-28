@@ -1,0 +1,16 @@
+extends layouts/header.jade
+
+block content
+			.page-data
+				p Bienvenido #{user}
+				p Elija una opcion del menu:
+				ul
+					li 
+						a(href="/admin/opcion1") Opcion 1
+					li 
+						a(href="/admin/opcion2") Opcion 2
+					li 
+						a(href="/admin/opcion3") Opcion 3
+				a(href="/admin/logout") Logout
+
+			include layouts/footer.jade
