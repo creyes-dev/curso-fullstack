@@ -5,11 +5,11 @@ var router = express.Router();
  * Si el usuario posee una sesión activa entonces
  * redireccionarlo a la página que corresponda
  */
-function redireccionarUsuarioConSesion(res, callback){
-  var redir = false;
-
-	redir = true;
-  redireccionarUsuarioPaginaPrincipal(res);
+function redireccionarUsuarioConSesion(req, res, callback){
+  if (req.session.usuario != null){
+		redir = true;
+		redireccionarUsuarioPaginaPrincipal(res);
+	} 
   callback(redir);
 }
 
@@ -17,7 +17,6 @@ function redireccionarUsuarioConSesion(res, callback){
  * Redireccionar al usuario a la página principal
  */
 function redireccionarUsuarioPaginaPrincipal(res){
-	redir = true;
   res.render('index', {title: 'oki sssss'});
 }
 
@@ -37,6 +36,8 @@ function iniciarSesion(req, usuario, clave, callback){
 				if(!err){
 					if(filas.length > 0){
 						if(filas[0].cant > 0){
+              // Registrar el usuario en la sesión
+              req.session.usuario = usuario;
 							sesionIniciada = true;
 						}
 					}
@@ -54,9 +55,9 @@ function iniciarSesion(req, usuario, clave, callback){
 
 /* GET página login */
 router.get('/', function(req, res, next) {
-  redireccionarUsuarioConSesion(res, function(redir){
+  redireccionarUsuarioConSesion(req, res, function(redir){
     if(!redir){
-      res.render('login');
+      res.render('login', { layout: false });
     }
   });
 });
@@ -81,14 +82,15 @@ router.post("/", function(req, res, next) {
         res.render('login', { alerta: {
           titulo : 'Usuario o contraseña incorrectos',
           mensaje: ' El usuario y contraseña ingresados no corresponden a un usuario válido'},
-          us: { nombre : usuario.nombre }
+          us: { nombre : usuario.nombre }, layout: false
         });
       }
     } else {
       res.render('login', { alerta: {
         titulo: ' Ha ocurrido un error',
         mensaje: err },
-        us: { nombre : usuario.nombre }
+        us: { nombre : usuario.nombre }, 
+        layout: false
       });
     }
   });

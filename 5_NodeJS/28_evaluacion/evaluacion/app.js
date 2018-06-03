@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var session = require('express-session');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -14,7 +15,7 @@ var app = express();
  * Middleware que provee accesibilidad a conexiones con 
  * MySql durante el ciclo de vida de toda solicitud 
  */ 
- var myConnection = require('express-myconnection')
+ var myConnection = require('express-myconnection');
 
 /**
  * Obtener los datos requeridos para el acceso a 
@@ -48,6 +49,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({secret: 'calabaza', resave: true, saveUninitialized: true}));
 
 app.use('/', indexRouter);
 app.use('/login', usersRouter);

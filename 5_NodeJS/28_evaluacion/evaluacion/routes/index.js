@@ -6,43 +6,25 @@ var router = express.Router();
  * a la página a la que van los usuarios sin sesión
  * que es la página de inicio de sesion
  */ 
-function redireccionarUsuarioSinSesion(res, callback){
+function redireccionarUsuarioSinSesion(req, res, callback){
 	var redir = false;
+	
+	console.log("sesion: ");
+	console.log(req.session.usuario);
 
-	redir = true;
-	res.render('login'); 
-
+	if (req.session.usuario == null){
+		redir = true;
+		res.render('login', { layout: false });
+	}
   	callback(redir);
 }
 
-/*
-app.get('/', function(req, res, next) {
-	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM users ORDER BY id DESC',function(err, rows, fields) {
-			//if(err) throw err
-			if (err) {
-				req.flash('error', err)
-				res.render('user/list', {
-					title: 'User List', 
-					data: ''
-				})
-			} else {
-				// render to views/user/list.ejs template file
-				res.render('user/list', {
-					title: 'User List', 
-					data: rows
-				})
-			}
-		})
-	})
-})*/
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  redireccionarUsuarioSinSesion(res, function(redir) {
+  redireccionarUsuarioSinSesion(req, res, function(redir) {
     if(!redir){
-		res.render('index');    
-	}
+		res.render('index');
+		}
   });
 });
 
