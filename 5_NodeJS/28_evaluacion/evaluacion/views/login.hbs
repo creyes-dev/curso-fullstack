@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Productos - Inicio de sesión</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="evaluación-unidad2">
+    <meta name="author" content="creyes-dev">
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script type="text/javascript" src="js/jquery-3.1.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+  </head>
+  <body class="text-center">
+    <form class="form-signin" action="login" method="post">
+      <img class="mb-4" src="images/Metodos_160_160.png" alt="logo" >
+      <h5>Productos</h5>
+      <h1 class="h3 mb-3 font-weight-normal">Inicio de sesión</h1>
+      <label for="inputNombre" class="sr-only">Nombre</label>
+      <input type="text" id="inputNombre" class="form-control" name="nombre" placeholder="Nombre" value="{{us.nombre}}">
+      <label for="inputClave" class="sr-only">Clave</label>
+      <input type="password" id="inputClave" class="form-control" name="clave" placeholder="Contraseña">
+      {{!-- Solo mostrar una alerta cuando se reciba alguna --}}
+      {{#if alerta}}
+        <div class="alert alert-danger">
+          <strong>{{alerta.titulo}}</strong>{{alerta.mensaje}}
+        </div>
+      {{/if}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+    </form>
+  </body>
+</html>
