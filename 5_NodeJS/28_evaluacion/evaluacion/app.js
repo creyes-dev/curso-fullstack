@@ -8,6 +8,7 @@ var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var productosRouter = require('./routes/productos');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use(session({secret: 'calabaza', resave: true, saveUninitialized: true}));
 
 app.use('/', indexRouter);
 app.use('/login', usersRouter);
+app.use('/productos', productosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

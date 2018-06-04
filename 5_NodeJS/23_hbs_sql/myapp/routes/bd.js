@@ -14,5 +14,4 @@ conexion.connect(function (error){
         console.log('se inicio conexion');
 });
 
-
 module.exports=conexion;
