@@ -93,11 +93,16 @@ router.post("/alta", upload.array("imagen", 1), function(req, res, next) {
   redireccionarUsuarioSinSesion(req, res, function(redir) {
     if (!redir) {
 
+			var refFoto = "";
+			if(req.files.length > 0){
+				refFoto = "public/fotos/" + req.files[0].originalname;
+			}
+
       var data = {
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         precio: req.body.precio,
-        imagen: "public/fotos/" + req.files[0].originalname
+        imagen: refFoto
 			};
 			
 			// validar producto ingresado
@@ -125,7 +130,9 @@ router.post("/alta", upload.array("imagen", 1), function(req, res, next) {
 										titulo: "ERROR: ",
 										mensaje: error.message
 									}
-									res.render("/alta", { producto: data, mensajes: mensajes });
+									res.render("altaproducto", { 
+										producto: data, 
+										mensajes: mensajes });
 								}
 							});
 						} else {
@@ -133,12 +140,16 @@ router.post("/alta", upload.array("imagen", 1), function(req, res, next) {
 								titulo: "ERROR: ",
 								mensaje: error.message
 							}
-							res.render("/alta", { producto: data, mensajes: mensajes });
+							res.render("altaproducto", { 
+								producto: data, 
+								mensajes: mensajes });
 						}
 					});
 				} else {
 					// producto no válido
-					res.render("/alta", { producto: data, mensajes: mensajes });
+					res.render("altaproducto", { 
+						producto: data, 
+						mensajes: mensajes });
 				}
 			});
     }

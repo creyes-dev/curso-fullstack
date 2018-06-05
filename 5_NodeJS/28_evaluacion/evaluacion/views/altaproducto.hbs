@@ -7,20 +7,29 @@
     <form action="/productos/alta" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="txtNombre">Nombre</label>
-            <input class="form-control" id="txtNombre" name="nombre" placeholder="Nombre">
+            <input class="form-control" id="txtNombre" name="nombre" value="{{producto.nombre}}" placeholder="Nombre">
         </div>
         <div class="form-group">
             <label for="txtDescripcion">Descripción</label>
-            <textarea class="form-control" rows="2" name="descripcion" id="txtDescripcion" placeholder="Descripción"></textarea>
+            <textarea class="form-control" rows="2" name="descripcion" id="txtDescripcion" value="{{producto.descripcion}}" placeholder="Descripción"></textarea>
         </div>
         <div class="form-group">
             <label for="txtPrecio">Precio</label>
-            <input class="form-control" id="txtPrecio" name="precio" placeholder="Precio">
+            <input class="form-control" id="txtPrecio" name="precio" value="{{producto.precio}}" placeholder="Precio">
         </div>
         <div class="form-group">
             <label for="flImagen">Foto</label>
             <input type="file" class="form-control" id="flImagen" name="imagen" placeholder="Foto">
         </div>
+        {{#if mensajes}}
+            <div class="alert alert-danger">
+                {{#each mensajes}}
+                    <li>
+                        <strong>{{titulo}}</strong>{{mensaje}}
+                    </li>
+                {{/each}}
+            </div>
+        {{/if}}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
