@@ -23,7 +23,17 @@ function redireccionarUsuarioSinSesion(req, res, callback){
 router.get('/', function(req, res, next) {
   redireccionarUsuarioSinSesion(req, res, function(redir) {
     if(!redir){
-		res.render('index');
+			req.getConnection(function(error, conn) {
+				if(!error){
+					conn.query("SELECT id, descripcion, imagen, nombre, precio FROM productos", 
+						function(err, filas, campos) {
+							if(!err){
+								console.log(filas);
+								res.render('index', { productos: filas });
+							}
+					});
+				}
+			});	
 		}
   });
 });

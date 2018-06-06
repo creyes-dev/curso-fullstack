@@ -27,131 +27,163 @@ function redireccionarUsuarioSinSesion(req, res, callback) {
 }
 
 function redireccionarPaginaPrincipal(res) {
-  res.render("index", { title: "oki sssss" });
+  res.render("index");
 }
 
 /* Validación del producto */
-function validarProducto(producto, modificacion, callback){
-	var valido = false;
-	var mensajes = [];
+function validarProducto(producto, modificacion, callback) {
+  var valido = false;
+  var mensajes = [];
 
-	if(producto.nombre == ""){
-		mensajes[mensajes.length] = { 
-			titulo: "Campo faltante: Nombre. ",
-			mensaje: "Debe ingresar el nombre del producto"};
-	}
+  if (producto.nombre == "") {
+    mensajes[mensajes.length] = {
+      titulo: "Campo faltante: Nombre. ",
+      mensaje: "Debe ingresar el nombre del producto"
+    };
+  }
 
-	if(producto.descripcion == ""){
-		mensajes[mensajes.length] = { 
-			titulo: "Campo faltante: Descripción. ",
-			mensaje: "Debe ingresar una descripción del producto" }
-		}
+  if (producto.descripcion == "") {
+    mensajes[mensajes.length] = {
+      titulo: "Campo faltante: Descripción. ",
+      mensaje: "Debe ingresar una descripción del producto"
+    };
+  }
 
-		if(producto.precio == ""){
-			mensajes[mensajes.length] = { 
-				titulo: "Campo faltante: Precio. ",
-				mensaje: "Debe ingresar el precio del producto" }
-		} else {
-			var rePrecio = /^\d{0,8}[.]?\d{1,2}$/;
-			if (!rePrecio.test(producto.precio)) {
-				mensajes[mensajes.length] = { 
-					titulo: "Campo no válido: Precio. ",
-					mensaje: "Debe ingresar un precio válido" }
-			}
-		}
+  if (producto.precio == "") {
+    mensajes[mensajes.length] = {
+      titulo: "Campo faltante: Precio. ",
+      mensaje: "Debe ingresar el precio del producto"
+    };
+  } else {
+    var rePrecio = /^\d{0,8}[.]?\d{1,2}$/;
+    if (!rePrecio.test(producto.precio)) {
+      mensajes[mensajes.length] = {
+        titulo: "Campo no válido: Precio. ",
+        mensaje: "Debe ingresar un precio válido"
+      };
+    }
+  }
 
-		if(modificacion){
-			if(producto.imagen == ""){
-				mensajes[mensajes.length] = { 
-					titulo: "Campo faltante: Archivo. ",
-					mensaje: "Debe ingresar un archivo" }
-				} else {
-					var reFoto = /^.*\.(jpg|jpeg|png|gif)$/;
-					if (!reFoto.test(producto.imagen)) {
-						mensajes[mensajes.length] = { 
-							titulo: "Campo no válido: Imágen. ",
-							mensaje: "Debe ingresar una imágen válida" }
-					}
-				}
-		}
-		
-		if(mensajes.length == 0) valido = true;
-		callback(valido, mensajes);
-	}	
+  if (modificacion) {
+    if (producto.imagen == "") {
+      mensajes[mensajes.length] = {
+        titulo: "Campo faltante: Archivo. ",
+        mensaje: "Debe ingresar un archivo"
+      };
+    } else {
+      var reFoto = /^.*\.(jpg|jpeg|png|gif)$/;
+      if (!reFoto.test(producto.imagen)) {
+        mensajes[mensajes.length] = {
+          titulo: "Campo no válido: Imágen. ",
+          mensaje: "Debe ingresar una imágen válida"
+        };
+      }
+    }
+  }
+
+  if (mensajes.length == 0) valido = true;
+  callback(valido, mensajes);
+}
 
 /* GET redirección a la página de alta de productos */
 router.get("/alta", upload.array("imagen", 1), function(req, res, next) {
-	redireccionarUsuarioSinSesion(req, res, function(redir) {
-		if (!redir) {
-			res.render("altaproducto");
-		}
-	});
+  redireccionarUsuarioSinSesion(req, res, function(redir) {
+    if (!redir) {
+      res.render("altaproducto");
+    }
+  });
 });
 
 /* POST alta de un producto */
 router.post("/alta", upload.array("imagen", 1), function(req, res, next) {
   redireccionarUsuarioSinSesion(req, res, function(redir) {
     if (!redir) {
-
-			var refFoto = "";
-			if(req.files.length > 0){
-				refFoto = "public/fotos/" + req.files[0].originalname;
-			}
+      var refFoto = "";
+      if (req.files.length > 0) {
+        refFoto = "fotos/" + req.files[0].originalname;
+      }
 
       var data = {
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         precio: req.body.precio,
         imagen: refFoto
-			};
-			
-			// validar producto ingresado
-			validarProducto(data,false,function(valido, mensajes){
-				if(valido){
-					// producto es válido
+      };
 
-					// Obtener la foto del producto como archivo temporal
-					fs.createReadStream("./uploads/" + req.files[0].filename).pipe(fs.createWriteStream("./public/fotos/" + req.files[0].originalname));
+      // validar producto ingresado
+      validarProducto(data, false, function(valido, mensajes) {
+        if (valido) {
+          // producto es válido
 
-					//borramos el archivo temporal creado
-					fs.unlink('./uploads/'+req.files[0].filename, (err) => {
-						if (err) throw err;
-						console.log('./uploads/file.jpg fue subido');
-					});
-					
-					// Registrar el producto en la base de datos
-					req.getConnection(function(error, conn){
-						if(!error){
-							conn.query("INSERT INTO productos SET ?", data, function(error, resultado){
-								if(!error){
-									redireccionarPaginaPrincipal(res);
-								} else {
-									mensajes[mensajes.length] = {
-										titulo: "ERROR: ",
-										mensaje: error.message
-									}
-									res.render("altaproducto", { 
-										producto: data, 
-										mensajes: mensajes });
-								}
-							});
-						} else {
-							mensajes[mensajes.length] = {
-								titulo: "ERROR: ",
-								mensaje: error.message
-							}
-							res.render("altaproducto", { 
-								producto: data, 
-								mensajes: mensajes });
-						}
-					});
-				} else {
-					// producto no válido
-					res.render("altaproducto", { 
-						producto: data, 
-						mensajes: mensajes });
-				}
-			});
+          // Obtener la foto del producto como archivo temporal
+          fs.createReadStream("./uploads/" + req.files[0].filename).pipe(
+            fs.createWriteStream("./public/fotos/" + req.files[0].originalname)
+          );
+
+          //borramos el archivo temporal creado
+          fs.unlink("./uploads/" + req.files[0].filename, err => {
+            if (err) throw err;
+            console.log("./uploads/file.jpg fue subido");
+          });
+
+          // Registrar el producto en la base de datos
+          req.getConnection(function(error, conn) {
+            if (!error) {
+              conn.query("INSERT INTO productos SET ?", data, function(
+                error,
+                resultado
+              ) {
+                if (!error) {
+                  redireccionarPaginaPrincipal(res);
+                } else {
+                  mensajes[mensajes.length] = {
+                    titulo: "ERROR: ",
+                    mensaje: error.message
+                  };
+                  res.render("altaproducto", {
+                    producto: data,
+                    mensajes: mensajes
+                  });
+                }
+              });
+            } else {
+              mensajes[mensajes.length] = {
+                titulo: "ERROR: ",
+                mensaje: error.message
+              };
+              res.render("altaproducto", {
+                producto: data,
+                mensajes: mensajes
+              });
+            }
+          });
+        } else {
+          // producto no válido
+          res.render("altaproducto", {
+            producto: data,
+            mensajes: mensajes
+          });
+        }
+      });
+    }
+  });
+});
+
+/* POST baja de un producto */
+router.post("/baja", function(req, res, next) {
+  redireccionarUsuarioSinSesion(req, res, function(redir) {
+    if (!redir) {
+      var id = req.body.codigo;
+      // Eliminar el producto de la base de datos
+      req.getConnection(function(error, conn) {
+        if (!error) {
+          conn.query("DELETE FROM productos WHERE id = ?", id, function(error) {
+            if (!error) {
+              redireccionarPaginaPrincipal(res);
+            }
+          });
+        }
+      });
     }
   });
 });
