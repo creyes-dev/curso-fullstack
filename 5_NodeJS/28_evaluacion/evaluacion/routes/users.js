@@ -17,7 +17,7 @@ function redireccionarUsuarioConSesion(req, res, callback){
  * Redireccionar al usuario a la página principal
  */
 function redireccionarUsuarioPaginaPrincipal(res){
-  res.render('index');
+  res.redirect('/');  
 }
 
 /**
@@ -77,7 +77,7 @@ router.post("/", function(req, res, next) {
     if(!err){
       if(auth){
         // Sesion iniciada, redireccionar a la página principal
-        res.render('index', {title: 'oki sssss'});
+        redireccionarUsuarioPaginaPrincipal(res);
       } else {
         res.render('login', { alerta: {
           titulo : 'Usuario o contraseña incorrectos',

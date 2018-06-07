@@ -27,7 +27,7 @@ function redireccionarUsuarioSinSesion(req, res, callback) {
 }
 
 function redireccionarPaginaPrincipal(res) {
-  res.render("index");
+  res.redirect('/');  
 }
 
 /* Validación del producto */
@@ -251,7 +251,7 @@ router.post("/modificacion", upload.array("imagen", 1), function(req, res, next)
 
               console.log(consulta);
 
-              conn.query(consulta, id, function(error) {
+              conn.query(consulta, producto.id, function(error) {
                 if (!error) {
                   redireccionarPaginaPrincipal(res);
                 } else {

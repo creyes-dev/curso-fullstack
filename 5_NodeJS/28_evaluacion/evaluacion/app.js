@@ -54,7 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'calabaza', resave: true, saveUninitialized: true}));
 
 app.use('/', indexRouter);
-app.use('/index', indexRouter);
 app.use('/login', usersRouter);
 app.use('/productos', productosRouter);
 
