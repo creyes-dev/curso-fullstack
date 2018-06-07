@@ -1,0 +1,37 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Modificación de productos</h1>
+    </div>
+</section>
+<div class="container">
+    <form action="/productos/modificacion" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="codigo" value="{{producto.id}}">
+        <div class="form-group">
+            <label for="txtNombre">Nombre</label>
+            <input class="form-control" id="txtNombre" name="nombre" value="{{producto.nombre}}" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <label for="txtDescripcion">Descripción</label>
+            <textarea class="form-control" rows="2" name="descripcion" id="txtDescripcion" value="{{producto.descripcion}}" placeholder="Descripción"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="txtPrecio">Precio</label>
+            <input class="form-control" id="txtPrecio" name="precio" value="{{producto.precio}}" placeholder="Precio">
+        </div>
+        <div class="form-group">
+            <label for="flImagen">Foto</label>
+            <input type="hidden" name="imgAnterior" value="{{producto.imagen}}">
+            <input type="file" class="form-control" id="flImagen" name="imagen" placeholder="Foto">
+        </div>
+        {{#if mensajes}}
+            <div class="alert alert-danger">
+                {{#each mensajes}}
+                    <li>
+                        <strong>{{titulo}}</strong>{{mensaje}}
+                    </li>
+                {{/each}}
+            </div>
+        {{/if}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-12 col-lg-12 col-xl-6">
                                     <form action='/productos/baja' method='POST'>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/productos/editar/{{this.id}}'">Editar</button>
                                         <input type="hidden" name="codigo" value="{{this.id}}">
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>
                                     </form>

@@ -17,7 +17,7 @@ function redireccionarUsuarioConSesion(req, res, callback){
  * Redireccionar al usuario a la página principal
  */
 function redireccionarUsuarioPaginaPrincipal(res){
-  res.render('index', {title: 'oki sssss'});
+  res.render('index');
 }
 
 /**

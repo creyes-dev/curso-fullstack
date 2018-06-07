@@ -64,19 +64,21 @@ function validarProducto(producto, modificacion, callback) {
     }
   }
 
-  if (modificacion) {
-    if (producto.imagen == "") {
+  if (modificacion == false) {
+    if ((producto.imagen == "") && (modificacion == false)) {
       mensajes[mensajes.length] = {
         titulo: "Campo faltante: Archivo. ",
         mensaje: "Debe ingresar un archivo"
       };
     } else {
-      var reFoto = /^.*\.(jpg|jpeg|png|gif)$/;
-      if (!reFoto.test(producto.imagen)) {
-        mensajes[mensajes.length] = {
-          titulo: "Campo no válido: Imágen. ",
-          mensaje: "Debe ingresar una imágen válida"
-        };
+      if(producto.imagen != ""){
+        var reFoto = /^.*\.(jpg|jpeg|png|gif)$/;
+        if (!reFoto.test(producto.imagen)) {
+          mensajes[mensajes.length] = {
+            titulo: "Campo no válido: Imágen. ",
+            mensaje: "Debe ingresar una imágen válida"
+          };
+        }
       }
     }
   }
@@ -161,6 +163,123 @@ router.post("/alta", upload.array("imagen", 1), function(req, res, next) {
           // producto no válido
           res.render("altaproducto", {
             producto: data,
+            mensajes: mensajes
+          });
+        }
+      });
+    }
+  });
+});
+
+/* GET: Redirección y relleno del formulario de modificación de un producto */
+router.get('/editar/:id', function(req, res, next) {
+  var idParametro = req.params.id;
+  console.log("El parametro a mostrar! ");
+  console.log(idParametro);
+  redireccionarUsuarioSinSesion(req, res, function(redir) {
+    if(!redir){
+			req.getConnection(function(error, conn) {
+				if(!error){
+          conn.query("SELECT id, descripcion, imagen, nombre, precio FROM productos" + 
+                     " WHERE id = " + idParametro, function(err, filas, campos) {
+							if(!err){
+                console.log(filas);
+
+                var producto = null;
+                if(filas.length > 0) {
+                  producto = filas[0];
+                }
+								res.render('modificacionproducto', { producto: producto });
+							}
+					});
+				}
+			});	
+		}
+  });
+});
+
+/* POST Modificación de un producto */
+router.post("/modificacion", upload.array("imagen", 1), function(req, res, next) {
+  redireccionarUsuarioSinSesion(req, res, function(redir) {
+    if (!redir) {
+
+      var refFoto = "";
+      if (req.files.length > 0) {
+        refFoto = "fotos/" + req.files[0].originalname;
+      }
+
+      var producto = {
+        id: req.body.codigo,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: req.body.precio,
+        imagenAnterior: req.body.imgAnterior,
+        imagen: refFoto
+      };
+
+      validarProducto(producto, true, function(valido, mensajes) {
+        if (valido) {
+
+          // Los datos del producto son válidos
+
+          // Si ha ingresado una imágen y es distinta a la que el producto posee 
+          // entonces registrar la nueva imágen para que sea asociada al producto 
+          if((producto.imagen != "") && (producto.imagen != producto.imagenAnterior)) {
+              // Obtener la foto del producto como archivo temporal
+            fs.createReadStream("./uploads/" + req.files[0].filename).pipe(
+              fs.createWriteStream("./public/fotos/" + req.files[0].originalname)
+            );
+            //borramos el archivo temporal creado
+            fs.unlink("./uploads/" + req.files[0].filename, err => {
+              if (err) throw err;
+              console.log("./uploads/file.jpg fue subido");
+            });
+          }
+
+          // Eliminar el producto de la base de datos
+          req.getConnection(function(error, conn) {
+            if (!error) {
+              var consulta = "UPDATE productos SET nombre = '" + producto.nombre + "', " +
+                             "descripcion = '" + producto.descripcion + "'," +
+                             "precio = " + producto.precio
+              
+              if(producto.imagen != ""){
+                consulta = consulta + ", imagen = '" + producto.imagen + "'";
+              }
+
+              consulta = consulta + " WHERE id = ?";
+
+              console.log(consulta);
+
+              conn.query(consulta, id, function(error) {
+                if (!error) {
+                  redireccionarPaginaPrincipal(res);
+                } else {
+                  mensajes[mensajes.length] = {
+                    titulo: "ERROR: ",
+                    mensaje: error.message
+                  };
+                  res.render("modificacionproducto", {
+                    producto: producto,
+                    mensajes: mensajes
+                  });
+                }
+              });
+            } else {
+              mensajes[mensajes.length] = {
+                titulo: "ERROR: ",
+                mensaje: error.message
+              };
+              res.render("modificacionproducto", {
+                producto: producto,
+                mensajes: mensajes
+              });
+            }
+          });
+        } else {
+          // Datos del producto no válidos
+          res.render("modificacionproducto", {
+            producto: producto,
             mensajes: mensajes
           });
         }
