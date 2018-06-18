@@ -11,7 +11,7 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 // conexión a la base de datos 
-mongoose.connect('localhost:27017/carrocompras');
+mongoose.connect('mongodb://localhost:27017/carrocompras');
 
 // view engine setup
 

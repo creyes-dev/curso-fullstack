@@ -1,103 +1,23 @@
 
 {{# each productos }}
-  Producto!
-{{/each}}
 
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
+  <div class="row">
+    {{# each this }}
+      <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img clas="img-responsive" src="{{ this.imagen }}" alt="...">
+            <div class="caption">
+              <h3>Thumbnail titulo</h3>
+              <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
+              <div class="clearfix">
+                  <div class="precio pull-left">$12</div>
+                  <div class="pull-right">
+                      <p><a href="#" class="btn btn-success" role="button">Button</a></p>
+                  </div>
+              </div>
             </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-    <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img clas="img-responsive" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Gothiccover.png/220px-Gothiccover.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail titulo</h3>
-        <p class="descripcion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint non earum commodi esse cum odit dolor error quisquam beatae molestias assumenda, eos animi quidem dolore maiores quasi tenetur soluta! Consequatur!</p>
-        <div class="clearfix">
-            <div class="precio pull-left">$12</div>
-            <div class="pull-right">
-                <p><a href="#" class="btn btn-success" role="button">Button</a></p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  {{/each}}  
 </div>
+{{/each}}
