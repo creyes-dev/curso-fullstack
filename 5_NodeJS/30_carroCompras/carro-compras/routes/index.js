@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var Producto = require('../models/producto');
 var csrf = require('csurf');
+var passport = require('passport');
+
+var Producto = require('../models/producto');
 
 // Usar como middleware la protección 
 // contra CSRF
@@ -31,8 +33,15 @@ router.get('/usuario/registro', function(req,res,next){
 });
 
 /* POST registro de un usuario */
-router.post('/usuario/registro', function( req, res, next){
-  res.redirect('/');
+router.post('/usuario/registro', passport.authenticate('local.signup', {
+  successRedirect: '/usuario/perfil', 
+  failureRedirect: '/usuario/registro',
+  failureFlash: true
+}));
+
+/* GET página de perfil del usuario */
+router.get('/usuario/perfil', function(req, res, next){
+  res.render('usuario/perfil');
 });
 
 module.exports = router;

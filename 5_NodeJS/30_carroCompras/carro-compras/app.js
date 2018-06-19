@@ -6,6 +6,8 @@ var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 
@@ -13,6 +15,10 @@ var app = express();
 
 // conexión a la base de datos 
 mongoose.connect('mongodb://localhost:27017/carrocompras');
+
+// acceso global a las opciones de configuración 
+// de estrategia de autenticación con passport
+require('./config/passport');
 
 // view engine setup
 
@@ -23,8 +29,17 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// Configurar el manejo de sesiones
+// Configurar el middleware del manejo de sesiones
 app.use(session({secret:'calabaza', resave: false, saveUninitialized: false}));
+// El middleware Flash utilizará la sesión para mostrar mensajes 
+// por ejemplo alertas o resultados de validaciones
+app.use(flash());
+// Inicializar el middleware para solicitudes de autenticación 
+app.use(passport.initialize());
+// El middleware passport.session altera el objeto de la solicitud
+// y cambia la id de sesión (en los cookies del cliente) en un objeto
+// usuario deserializado
+app.use(passport.session());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
