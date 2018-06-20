@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
@@ -27,10 +28,12 @@ app.engine('.hbs', expressHbs({ defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 // Configurar el middleware del manejo de sesiones
 app.use(session({secret:'calabaza', resave: false, saveUninitialized: false}));
+//app.use(express.urlencoded({ extended: false })); ???
 // El middleware Flash utilizará la sesión para mostrar mensajes 
 // por ejemplo alertas o resultados de validaciones
 app.use(flash());
@@ -40,7 +43,6 @@ app.use(passport.initialize());
 // y cambia la id de sesión (en los cookies del cliente) en un objeto
 // usuario deserializado
 app.use(passport.session());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

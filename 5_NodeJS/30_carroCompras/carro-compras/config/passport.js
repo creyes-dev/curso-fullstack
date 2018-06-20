@@ -11,7 +11,7 @@ var Usuario = require('../models/usuario');
 var estrategiaLocal = require('passport-local').Strategy;
 
 passport.serializeUser(function(user, done){
-    // devolver null y el id del usuario
+    // almacenar solo el id del usuario
     done(null, user.id);
 });
 
@@ -29,7 +29,7 @@ passport.use('local.signup', new estrategiaLocal(
       passwordfield: 'password',  
       passReqToCallback: true }, 
     function(req, email, password, done){
-        Usuario.findOne({'email': email, function(err, user) {
+        Usuario.findOne({'email': email}, function(err, user) {
             if(err){
                 return done(err);
             }
@@ -47,5 +47,5 @@ passport.use('local.signup', new estrategiaLocal(
                     return done(null, nuevoUsuario);
                 }
             });
-        }});
+        });
 }));

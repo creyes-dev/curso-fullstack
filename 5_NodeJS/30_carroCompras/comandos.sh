@@ -7,3 +7,4 @@ npm install --save passport
 npm install --save bcrypt-nodejs
 npm install --save connect-flash
 npm install --save passport-local
+npm install --save body-parser
