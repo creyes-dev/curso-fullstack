@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
+var validator = require('express-validator');
 
 var indexRouter = require('./routes/index');
 
@@ -30,6 +31,9 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json()); // app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// Luego de que el body es parseado se debe ejecutar el 
+// middleware de validaciones
+app.use(validator());
 app.use(cookieParser());
 // Configurar el middleware del manejo de sesiones
 app.use(session({secret:'calabaza', resave: false, saveUninitialized: false}));

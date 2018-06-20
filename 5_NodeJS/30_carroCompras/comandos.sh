@@ -8,3 +8,4 @@ npm install --save bcrypt-nodejs
 npm install --save connect-flash
 npm install --save passport-local
 npm install --save body-parser
+npm install express-valitor --save

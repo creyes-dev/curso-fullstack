@@ -29,6 +29,22 @@ passport.use('local.signup', new estrategiaLocal(
       passwordfield: 'password',  
       passReqToCallback: true }, 
     function(req, email, password, done){
+        // Utilzar express-validator para definir
+        // cuales campos no son validos
+        req.checkBody('email', 'mail no válido').notEmpty().isEmail();
+        req.checkBody('password', 'password no válido').notEmpty().isLength({min:4});
+        // Extraer los errores que surjan segun las reglas
+        // definidas en las lineas anteriores 
+        var errores = req.validationErrors();
+        if(errores){
+            var mensajes = [];
+            errores.forEach(function(error){
+                mensajes.push(error.msg);
+            });
+
+            return done(null, false, req.flash('error', mensajes));
+        }
+
         Usuario.findOne({'email': email}, function(err, user) {
             if(err){
                 return done(err);

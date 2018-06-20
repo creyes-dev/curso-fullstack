@@ -29,7 +29,8 @@ router.get('/', function(req, res, next) {
 
 /* GET página de registro de usuarios */
 router.get('/usuario/registro', function(req,res,next){
-  res.render('usuario/registro', { csrfToken: req.csrfToken()});
+  var mensajes = req.flash('error');
+  res.render('usuario/registro', { csrfToken: req.csrfToken(), mensajes: mensajes, tieneErrores: mensajes.length > 0});
 });
 
 /* POST registro de un usuario */
