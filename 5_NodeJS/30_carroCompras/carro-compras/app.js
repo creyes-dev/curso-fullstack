@@ -12,6 +12,7 @@ var flash = require('connect-flash');
 var validator = require('express-validator');
 
 var indexRouter = require('./routes/index');
+var usuarioRouter = require('./routes/usuario');
 
 var app = express();
 
@@ -49,7 +50,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Login es una variable global que en cada solicitud o respuesta
+// tendrá almacenado si el usuario está autenticado, esto es util
+// para mostrar o no el menú de usuario en la barra superior
+app.use(function(req, res, next){
+  res.locals.login = req.isAuthenticated();
+  next();
+});
+
 app.use('/', indexRouter);
+app.use('/usuario', usuarioRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
