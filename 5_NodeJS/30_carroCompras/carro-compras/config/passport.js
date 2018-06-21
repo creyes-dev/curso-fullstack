@@ -65,3 +65,44 @@ passport.use('local.signup', new estrategiaLocal(
             });
         });
 }));
+
+passport.use('local.signin', new estrategiaLocal({
+    usernameField: 'email', 
+    passwordfield: 'password',  
+    passReqToCallback: true 
+},function(req, email, password, done){
+    // Utilzar express-validator para definir
+    // cuales campos no son validos
+    req.checkBody('email', 'mail no válido').notEmpty().isEmail();
+    req.checkBody('password', 'password no válido').notEmpty();
+    // Extraer los errores que surjan segun las reglas
+    // definidas en las lineas anteriores 
+    var errores = req.validationErrors();
+    if(errores){
+        var mensajes = [];
+        errores.forEach(function(error){
+            mensajes.push(error.msg);
+        });
+        return done(null, false, req.flash('error', mensajes));
+    }
+
+    // Obtener el usuario 
+    Usuario.findOne({'email': email}, function(err, user) {
+        if(err){
+            return done(err);
+        }
+        if(!user){
+            return done(null,false, {message: 'Usuario no encontrado'});
+        }
+
+        // se supone que se obtuvo un objeto 
+        // que corresponde con el esquema Usuario, por lo tanto
+        // se puede ejecutar su método validarPassword
+        if(!user.validarPassword(password)){
+            return done(null,false, {message: 'Contraseña no válida'});
+        }
+
+        return done(null,user);
+    });
+
+}));

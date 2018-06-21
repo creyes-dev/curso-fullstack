@@ -45,4 +45,16 @@ router.get('/usuario/perfil', function(req, res, next){
   res.render('usuario/perfil');
 });
 
+/* GET página de inicio de sesión del usuario */
+router.get('/usuario/iniciosesion', function(req, res, next){
+  var mensajes = req.flash('error');
+  res.render('usuario/iniciosesion', { csrfToken: req.csrfToken(), mensajes: mensajes, tieneErrores: mensajes.length > 0});
+});
+
+router.post('/usuario/iniciosesion', passport.authenticate('local.signin', {
+  successRedirect: '/usuario/perfil', 
+  failureRedirect: '/usuario/iniciosesion',
+  failureFlash: true
+}));
+
 module.exports = router;
