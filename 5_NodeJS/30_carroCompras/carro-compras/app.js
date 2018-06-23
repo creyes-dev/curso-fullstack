@@ -11,6 +11,10 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 
+// para que la sesión pueda ser persistida por mongodb 
+// debemos pasarle la sesión 
+var mongoStore = require('connect-mongo')(session);
+
 var indexRouter = require('./routes/index');
 var usuarioRouter = require('./routes/usuario');
 
@@ -36,8 +40,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // middleware de validaciones
 app.use(validator());
 app.use(cookieParser());
+
 // Configurar el middleware del manejo de sesiones
-app.use(session({secret:'calabaza', resave: false, saveUninitialized: false}));
+//app.use(session({secret:'calabaza', resave: false, saveUninitialized: false}));
+
+// Configurar el middleware del manejo de sesiones
+// para que las sesiones sean persistidas por mongodb
+app.use(session({
+  secret:'calabaza', 
+  resave: false, 
+  saveUninitialized: false,
+  store: new mongoStore({ mongooseConnection: mongoose.connection }), // utilizar la conexión actual
+  cookie: { maxAge: 180 * 60 * 1000 }
+}));
+
 //app.use(express.urlencoded({ extended: false })); ???
 // El middleware Flash utilizará la sesión para mostrar mensajes 
 // por ejemplo alertas o resultados de validaciones
@@ -52,15 +68,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Login es una variable global que en cada solicitud o respuesta
 // tendrá almacenado si el usuario está autenticado, esto es util
-// para mostrar o no el menú de usuario en la barra superior
+// para mostrar o no el menú de usuario en la barra superior,
+// la variable de sesión también es accesible desde las vistas
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
   next();
 });
 
 app.use('/', indexRouter);
 app.use('/usuario', usuarioRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
