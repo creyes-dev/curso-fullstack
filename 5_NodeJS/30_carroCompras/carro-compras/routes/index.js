@@ -32,13 +32,29 @@ router.get('/agregarcarrocompras/:id', function(req, res, next){
     if(err){
       return res.redirect('/');
     } else {
+      console.log(producto);
       carroCompras.agregar(producto, producto.id);
-      req.session.CarroCompras = carroCompras;
+
       console.log(req.session.CarroCompras);
+      req.session.CarroCompras = carroCompras;
+      
       res.redirect('/');
     }
   });
+});
 
+/* GET dirigirse a la página que contiene el detalle del carro de compras */
+router.get('/carro-compras', function(req, res, next){
+  // Si no hay un carro de compras en la sesión entonces redirigir
+  // a la página del carro de compras enviándo una variable de 
+  // productos en null
+  if (!req.session.CarroCompras){
+    return res.render('tienda/carro-compras', {productos: null});
+  } else {
+    // De lo contrario si hay un carro de compras en la sesión
+    var carroCompras = new CarroCompras(req.session.CarroCompras);
+    res.render('tienda/carro-compras', {productos: carroCompras.generarArray(), precioTotal: carroCompras.precioTotal });
+  }
 });
 
 module.exports = router;

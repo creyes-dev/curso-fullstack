@@ -11,6 +11,7 @@ module.exports = function CarroCompras(carroComprasAnterior){
 
     // Agrega un nuevo item al carro de compras
     this.agregar = function(item, id){
+        // Obtener el objeto producto dentro de la colección
         var itemAlmacenado = this.items[id];
 
         // si el item a agregar no está presente en el carro de 
@@ -18,7 +19,8 @@ module.exports = function CarroCompras(carroComprasAnterior){
         // la cantidad y el precio total por item que ya existe en el 
         // carro de compras
         if(!itemAlmacenado){
-            itemAlmacenado = this.items[id] = {item: item, cantidad: 0, precio: 0};
+            itemAlmacenado = {item: item, cantidad: 0, precio: 0};
+            this.items[id] = itemAlmacenado
         } // TODO: CAmbiar lo de arriba!
 
         itemAlmacenado.cantidad++;

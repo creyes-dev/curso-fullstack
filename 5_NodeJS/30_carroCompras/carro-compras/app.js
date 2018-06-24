@@ -69,7 +69,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Login es una variable global que en cada solicitud o respuesta
 // tendrá almacenado si el usuario está autenticado, esto es util
 // para mostrar o no el menú de usuario en la barra superior,
-// la variable de sesión también es accesible desde las vistas
+// También se exponen las variables de sesión 
+// para que las mismas sean accesibles desde las vistas
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
