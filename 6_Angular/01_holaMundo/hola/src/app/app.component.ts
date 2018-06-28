@@ -15,5 +15,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   // las propiedades de la clase representan el modelo de datos
   // son accesibles desde la vista
-  title = 'app';
+  title = 'mi primer app Angular2';
+  visible=true;
+
+  mostrarOcultar(){
+  	if (this.visible)
+  		this.visible = false;
+  	else
+  		this.visible= true;
+  }
+
 }
