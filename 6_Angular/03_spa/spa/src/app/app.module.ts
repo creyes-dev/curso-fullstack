@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-//Rutas
+// Rutas
 import { APP_ROUTING } from './app.routes';
+
+// Servicios
+import { HeroesService } from './services/heroes.service';
 
 // importación automática de componentes
 import { AppComponent } from './app.component';
@@ -10,6 +13,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
+import { HeroeComponent } from './components/heroe/heroe.component';
+//import { HeroeComponent } from './components/heroe/heroe.component't';
 
 @NgModule({
   declarations: [
@@ -17,13 +22,14 @@ import { HeroesComponent } from './components/heroes/heroes.component';
     NavbarComponent,
     HomeComponent,
     AboutComponent,
-    HeroesComponent
+    HeroesComponent,
+    HeroeComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [HeroesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
