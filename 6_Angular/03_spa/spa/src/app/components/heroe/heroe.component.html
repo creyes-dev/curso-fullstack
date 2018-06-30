@@ -1,3 +1,20 @@
-<p>
-  heroe works!
-</p>
+<div class="row">
+  <div class="col-12" style="border-bottom: 1px solid rgba(0,0,0,.125);">
+    <h1>{{ heroe.nombre }}  <small class="text-muted">{{ heroe.aparicion }}</small></h1>
+  </div>
+</div>
+<div class="row animated fadeIn fast" style="margin-top: 15px;">
+  <div class="col-12 col-md-4">
+    <img class="card-img-top" [src]="heroe.img" [alt]="heroe.nombre">
+    <br><br>
+    <button type="button" (click)="volverAlListado()" class="btn btn-outline-danger btn-block">Regresar</button>
+  </div>
+  <div class="col-6 col-md-8">
+    <h3>{{ heroe.nombre }}</h3>
+    <p>{{ heroe.bio }}</p>
+    <div>
+      <img *ngIf="heroe.casa == 'DC'" src="assets/img/dc-comics-logo.png" class="img-logo">
+      <img *ngIf="heroe.casa == 'Marvel'" src="assets/img/marvel-logo.png" class="img-logo">
+    </div>
+  </div>
+</div>
