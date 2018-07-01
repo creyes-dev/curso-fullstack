@@ -25,4 +25,9 @@ export class ResultadosBusquedaComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  verHeroe(idx: number) {
+    this.router.navigate(['/heroe', idx]);
+  }
+
 }
