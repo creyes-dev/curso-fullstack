@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12" style="border-bottom: 1px solid rgba(0,0,0,.125);">
-    <h1>{{ heroe.nombre }}  <small class="text-muted">{{ heroe.aparicion }}</small></h1>
+    <h1>{{ heroe.nombre | uppercase }}  <small class="text-muted">{{ heroe.aparicion | date: 'y' }}</small></h1>
   </div>
 </div>
 <div class="row animated fadeIn fast" style="margin-top: 15px;">
@@ -12,6 +12,8 @@
   <div class="col-6 col-md-8">
     <h3>{{ heroe.nombre }}</h3>
     <p>{{ heroe.bio }}</p>
+    <br>
+    <p>Puntos de Poder: {{ heroe.puntosPoder | number:'1.0-0' }}</p>
     <div>
       <img *ngIf="heroe.casa == 'DC'" src="assets/img/dc-comics-logo.png" class="img-logo">
       <img *ngIf="heroe.casa == 'Marvel'" src="assets/img/marvel-logo.png" class="img-logo">

@@ -17,8 +17,6 @@ export class ResultadosBusquedaComponent implements OnInit {
               private router: Router,
               private _heroesService: HeroesService) {
                 this.activatedRoute.params.subscribe( params => {
-                  console.log('params:');
-                  console.log(params);
                   this.heroes = this._heroesService.buscarHeroe(params.texto);
                 });
               }
