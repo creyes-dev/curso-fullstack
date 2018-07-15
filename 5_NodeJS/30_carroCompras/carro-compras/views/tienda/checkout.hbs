@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <h1>Checkout</h1>
+        <h4>Total: ${{total}}</h4>
+
+        <form action="/checkout" method="post" id="checkout-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Direccion</label>
+                    <input type="direccion" class="form-control" id="direccion" placeholder="direccion" required>
+                </div>
+            </div>
+            <hr>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre-tarjeta">Nombre del propietario de la tarjeta</label>
+                    <input type="text" class="form-control" id="nombre-tarjeta" placeholder="nombre-tarjeta" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="numero-tarjeta">Número de la tarjeta</label>
+                    <input type="text" class="form-control" id="numero-tarjeta" placeholder="numero-tarjeta" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="mes-vencimiento-tarjeta">Mes de vencimiento</label>
+                    <input type="text" class="form-control" id="mes-vencimiento-tarjeta" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="anio-vencimiento-tarjeta">Año de vencimiento</label>
+                    <input type="text" class="form-control" id="anio-vencimiento-tarjeta" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tarjeta-cvc">CVC</label>
+                    <input type="text" class="form-control" id="tarjeta-cvc" placeholder="Password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Comprar</button>
+        </form>
+
+    </div>
+</div>

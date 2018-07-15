@@ -57,4 +57,17 @@ router.get('/carro-compras', function(req, res, next){
   }
 });
 
+router.get('/checkout', function(req, res, next){
+
+  if (!req.session.CarroCompras){
+    // Redireccionar a la función que atiende el GET de /carro-compras
+    return res.redirect('tienda/carro-compras');
+  }
+
+  // De lo contrario si hay un carro de compras
+  // cargarlo y mostrarlo en la vista del checkout
+  var carroCompras = new CarroCompras(req.session.CarroCompras);
+  res.render('tienda/checkout', {total: carroCompras.precioTotal });
+});
+
 module.exports = router;
