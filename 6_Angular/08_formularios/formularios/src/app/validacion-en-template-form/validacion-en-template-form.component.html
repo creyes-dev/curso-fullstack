@@ -1,0 +1,102 @@
+<h4>Formularios
+  <small>template</small>
+</h4>
+<hr>
+<!--forma es una variable local a la que le asignamos todo el contenido de ngForm.-->
+<!--Cuando llamamos a traves de la directiva ngSubmmit a la funcion guardar() le pasamos el contenido del formulario que lo tenemos en esa variable local forma -->
+<form novalidate #forma="ngForm" (ngSubmit)="guardar(forma)">
+
+  <div>
+
+    <div class="form-group row" [ngClass]="{'has-danger' : nombre.errors?.required || nombre.errors?.minlength }">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+
+        <input class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="usuario.nombre" minlength="5" required
+          #nombre="ngModel">
+        <div *ngIf="nombre.errors?.required" class="form-control-feedback">
+          Este campo es obligatorio
+        </div>
+        <div *ngIf="nombre.errors?.minlength" class="form-control-feedback">
+          Este campo requiere una longitud minima de {{nombre.errors.minlength.requiredLength}} caracteres
+        </div>
+        <!-- Al poner en el campo de input #nombre asignamos el contenido de ngModel a la variable local nombre por eso en los divs para mostrar los errores hacemos referencia a nombre.errors?.required y nombre.errors?.minlegth Si lo probamos en el navegador con f12 veran el contenido de las variables mencionadas por los console.log que tenemos en la funcion guardar() -->
+      </div>
+    </div>
+
+    <div class="form-group row" [ngClass]="{'has-danger' : apellido.errors?.required }">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+
+        <input class="form-control" type="text" placeholder="Apellido" name="apellido" [(ngModel)]="usuario.apellido" required #apellido="ngModel">
+        <div *ngIf="apellido.errors?.required" class="form-control-feedback">
+          Este campo es obligatorio
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row" [ngClass]="{'has-danger' : email.errors?.required || email.errors?.pattern }">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-md-8">
+
+      <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="usuario.email" required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
+      <div *ngIf="email.errors?.required" class="form-control-feedback">
+        Este campo es obligatorio
+      </div>
+      <div *ngIf="email.errors?.pattern" class="form-control-feedback">
+        Este campo no tiene formato de mail valido
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Pais</label>
+    <div class="col-8">
+      <select class="form-control" name="pais" [(ngModel)]="usuario.pais">
+        <option value="">Seleccione una opcion</option>
+        <option *ngFor="let pais of paises" [value]="pais.codigo">{{pais.nombre}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Sexo</label>
+    <div class="col-8">
+      <div *ngFor="let s of sexos" class="form-check">
+        <input [(ngModel)]="usuario.sexo" class="form-check-input" type="radio" name="sexo" [value]="s">
+        <label class="form-check-label" for="sexo1">
+          {{ s }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Acepta</label>
+    <div class="col-8">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" [(ngModel)]="usuario.acepta" name="acepta" required>
+        <label class="form-check-label" for="defaultCheck1">
+          Acepto los terminos y condiciones
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary" [disabled]="!forma.valid">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<pre>
+{{ usuario | json }}
+</pre>

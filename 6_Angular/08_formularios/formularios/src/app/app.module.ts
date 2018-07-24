@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
+import { ValidacionEnTemplateFormComponent } from './validacion-en-template-form/validacion-en-template-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroFormComponent
+    HeroFormComponent,
+    ValidacionEnTemplateFormComponent
   ],
   imports: [
     BrowserModule,
