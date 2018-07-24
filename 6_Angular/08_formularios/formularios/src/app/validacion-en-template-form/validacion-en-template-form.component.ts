@@ -16,7 +16,7 @@ export class ValidacionEnTemplateFormComponent {
     pais: '',
     sexo: 'Femenino',
     acepta: false
-  }
+  };
 
   paises = [{
     codigo: 'ARG',
