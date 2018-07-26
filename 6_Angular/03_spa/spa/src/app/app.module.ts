@@ -38,6 +38,9 @@ import { TvshowComponent } from './components/tvshow/tvshow.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     APP_ROUTING
   ],
   providers: [
