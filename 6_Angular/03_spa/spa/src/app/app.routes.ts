@@ -4,6 +4,9 @@ import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroeComponent} from './components/heroe/heroe.component';
 import { ResultadosBusquedaComponent} from './components/resultados-busqueda/resultados-busqueda.component';
+import { ConectapiComponent} from './components/conectapi/conectapi.component';
+import { TvshowsComponent} from './components/tvshows/tvshows.component';
+import { TvshowComponent } from './components/tvshow/tvshow.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -11,6 +14,9 @@ const APP_ROUTES: Routes = [
   { path: 'heroes', component: HeroesComponent },
   { path: 'heroe/:id', component: HeroeComponent },
   { path: 'busqueda/:texto', component: ResultadosBusquedaComponent },
+  { path: 'conectapi', component: ConectapiComponent },
+  { path: 'tvshows', component: TvshowsComponent },
+  { path: 'tvshow/:id', component: TvshowComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

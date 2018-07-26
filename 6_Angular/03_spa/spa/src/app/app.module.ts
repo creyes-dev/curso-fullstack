@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
 
 // Servicios
 import { HeroesService } from './services/heroes.service';
+import { ConectapiService } from './services/conectapi.service';
+import { TvshowsServiceService } from './services/tvshows-service.service';
 
 // importación automática de componentes
 import { AppComponent } from './app.component';
@@ -15,6 +19,9 @@ import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroeComponent } from './components/heroe/heroe.component';
 import { ResultadosBusquedaComponent } from './components/resultados-busqueda/resultados-busqueda.component';
+import { ConectapiComponent } from './components/conectapi/conectapi.component';
+import { TvshowsComponent } from './components/tvshows/tvshows.component';
+import { TvshowComponent } from './components/tvshow/tvshow.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +31,20 @@ import { ResultadosBusquedaComponent } from './components/resultados-busqueda/re
     AboutComponent,
     HeroesComponent,
     HeroeComponent,
-    ResultadosBusquedaComponent
+    ResultadosBusquedaComponent,
+    ConectapiComponent,
+    TvshowsComponent,
+    TvshowComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING
   ],
-  providers: [HeroesService],
+  providers: [
+    HeroesService,
+    ConectapiService,
+    TvshowsServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,38 @@
+<h1>
+  Tvshows
+</h1>
+
+<button type="button" class="btn btn-primary" (click)="addTvshow()">New TvShow</button>
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Details</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tvshow of tvshows; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{tvshow.title}}</td>
+      <td><button type="button" (click)="verTvshow(tvshow._id)" class="btn btn-info">Details</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="updateTvshow(tvshow._id)">Edit</button></td>
+      <td><button type="button" class="btn btn-warning" (click)="delTvshow(tvshow._id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!--<div class="card-columns">
+  <div class="card" *ngFor="let tvshow of tvshows; let i = index">
+    <img class="card-img-top" [src]="tvshow.poster" [alt]="tvshow.title">
+    <div class="card-body">
+      <h5 class="card-title">{{ tvshow.title }}</h5>
+      <p class="card-text">{{ tvshow.genre }}</p>
+      <p class="card-text"><small class="text-muted">{{ tvshow.year }}</small></p>
+      <button type="button" (click)="verTvshow(i)" class="btn btn-outline-primary btn-block">Ver mas...</button>
+    </div>
+  </div>
+</div>-->
