@@ -22,6 +22,7 @@ import { ResultadosBusquedaComponent } from './components/resultados-busqueda/re
 import { ConectapiComponent } from './components/conectapi/conectapi.component';
 import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { TvshowComponent } from './components/tvshow/tvshow.component';
+import { AddComponent } from './components/crud/add/add.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TvshowComponent } from './components/tvshow/tvshow.component';
     ResultadosBusquedaComponent,
     ConectapiComponent,
     TvshowsComponent,
-    TvshowComponent
+    TvshowComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,

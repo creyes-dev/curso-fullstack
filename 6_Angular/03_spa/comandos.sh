@@ -17,3 +17,7 @@ ng generate service services/conectapi
 
 npm install --save rxjs-compat
 npm install cors --save
+
+ng generate component components/crud/add
+ng generate component components/crud/del
+ng generate component components/crud/update

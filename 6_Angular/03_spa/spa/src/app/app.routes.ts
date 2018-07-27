@@ -7,6 +7,7 @@ import { ResultadosBusquedaComponent} from './components/resultados-busqueda/res
 import { ConectapiComponent} from './components/conectapi/conectapi.component';
 import { TvshowsComponent} from './components/tvshows/tvshows.component';
 import { TvshowComponent } from './components/tvshow/tvshow.component';
+import { AddComponent } from './components/crud/add/add.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const APP_ROUTES: Routes = [
   { path: 'conectapi', component: ConectapiComponent },
   { path: 'tvshows', component: TvshowsComponent },
   { path: 'tvshow/:id', component: TvshowComponent },
+  { path: 'tvshows/add', component: AddComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

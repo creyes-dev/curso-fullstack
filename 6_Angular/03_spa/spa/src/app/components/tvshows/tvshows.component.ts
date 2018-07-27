@@ -25,4 +25,8 @@ export class TvshowsComponent implements OnInit {
     this.router.navigate(['/tvshow', idx]);
   }
 
+  addTvshow() {
+    this.router.navigate(['/tvshows', 'add']);
+  }
+
 }
