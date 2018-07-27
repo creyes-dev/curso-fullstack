@@ -22,4 +22,9 @@ export class TvshowsServiceService {
     });
   }
 
+  getTvshow(idx: string) {
+    return this.http.get(this.tvshowsUrl + 'tvshows/' + idx);
+  }
+
+
 }

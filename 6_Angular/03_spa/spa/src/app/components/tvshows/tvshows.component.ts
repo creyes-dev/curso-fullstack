@@ -11,7 +11,7 @@ export class TvshowsComponent implements OnInit {
 
   tvshows: any[] = [];
 
-  constructor(public _tvshowsService:TvshowsServiceService,
+  constructor(public _tvshowsService: TvshowsServiceService,
     private router: Router ) { }
 
     ngOnInit() {
@@ -20,5 +20,9 @@ export class TvshowsComponent implements OnInit {
         this.tvshows = data;
       });
     }
+
+  verTvshow(idx: number) {
+    this.router.navigate(['/tvshow', idx]);
+  }
 
 }
