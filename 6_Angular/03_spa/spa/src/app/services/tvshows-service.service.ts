@@ -40,7 +40,7 @@ export class TvshowsServiceService {
 
   updateTvshow (tvshow) {
   console.log(tvshow);
-    return this.http.put(this.tvshowsUrl + 'tvshow/' + tvshow._id, tvshow)
+    return this.http.put(this.tvshowsUrl + 'tvshows/' + tvshow._id, tvshow)
     .map( (resp: any) => {
       this.tvshow = resp;
       return this.tvshow;

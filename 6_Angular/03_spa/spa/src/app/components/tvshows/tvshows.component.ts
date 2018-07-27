@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tvshows',
-  templateUrl: './tvshows.component.html',
-  styleUrls: ['./tvshows.component.css']
+  templateUrl: './tvshows.component.html'
 })
 export class TvshowsComponent implements OnInit {
 
@@ -27,6 +26,10 @@ export class TvshowsComponent implements OnInit {
 
   addTvshow() {
     this.router.navigate(['/tvshows', 'add']);
+  }
+
+  updateTvshow(id: string) {
+    this.router.navigate(['/tvshows', 'update', id]);
   }
 
 }
