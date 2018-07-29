@@ -7,14 +7,14 @@ module.exports = formulario => {
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-      user: 'reyescristiane@gmail.com',
-      pass: 'MasterWolf6'
+      user: 'email@gmail.com',
+      pass: 'pass'
     }
   }));
 
   const mailOptions = {
     from: '"${formulario.nombre}" <${formulario.email}>',
-    to: "reyescristiane@gmail.com", 
+    to: "email@gmail.com", 
     subject: formulario.asunto,
     html: `
     <strong>Nombre:</strong> ${formulario.nombre} <br/> 
