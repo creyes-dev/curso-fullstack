@@ -6,7 +6,8 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'productos', component: ProductosComponent },
-  { path: 'contacto', component: ContactoComponent }
+  { path: 'contacto', component: ContactoComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true } );

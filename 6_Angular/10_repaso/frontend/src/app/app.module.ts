@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Servicios
 import { ProductosService } from './services/productos.service';
+import { ContactoService } from './services/contacto.service';
 
 // Rutas
 import { APP_ROUTING } from './app.routes';
@@ -31,7 +32,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     HttpClientModule,
     APP_ROUTING
   ],
-  providers: [ProductosService],
+  providers: [ ProductosService,
+               ContactoService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

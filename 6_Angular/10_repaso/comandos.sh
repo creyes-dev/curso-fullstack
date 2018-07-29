@@ -18,3 +18,4 @@ npm install bootstrap --save
 npm install sweetalert
 
 ng generate service services/productos
+ng generate service services/contacto

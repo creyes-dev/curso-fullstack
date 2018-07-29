@@ -14,14 +14,14 @@ var smtpTransport = require('nodemailer-smtp-transport');
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'reyescristiane@gmail.com',
-        pass: 'MasterWolf6'
+        user: 'mail@gmail.com',
+        pass: 'pass'
       }
     }));
 
     const mailOptions = {
       from: '"${formulario.nombre}" <${formulario.email}>',
-      to: "reyescristiane@gmail.com", 
+      to: "mail@gmail.com", 
       subject: formulario.asunto,
       html: `
       <strong>Nombre:</strong> ${formulario.nombre} <br/> 
