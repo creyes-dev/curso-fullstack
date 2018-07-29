@@ -17,6 +17,4 @@ npm install popper.js --save
 npm install bootstrap --save
 npm install sweetalert
 
-
-
-ng generate service app/services/message
+ng generate service services/productos

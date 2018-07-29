@@ -1,3 +1,15 @@
-<p>
-  productos works!
-</p>
+<h1 class="my-4">Productos</h1>
+
+<div class="row">
+  <div class="col-lg-4 col-sm-6 portfolio-item" *ngFor="let producto of productos" >
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src= "{{producto.imagen}}" alt="foto"></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">{{producto.titulo}}</a>
+        </h4>
+        <p class="card-text">{{producto.descripcion}}</p>
+      </div>
+    </div>
+  </div>
+</div>

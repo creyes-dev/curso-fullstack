@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// Servicios
+import { ProductosService } from './services/productos.service';
+
 // Rutas
 import { APP_ROUTING } from './app.routes';
 
@@ -28,7 +31,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     HttpClientModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [ProductosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
